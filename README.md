@@ -7,9 +7,13 @@
  - Stephen Ohl
 
 ## Server
- - Domain: [???.com](#a)
- - Address: [1.1.1.1](#a)
- - SSH/TLS Key: ???
+ - Domain: [notdotcom.fun](https://notdotcom.fun/)
+ - Address: [139.162.34.109](139.162.34.109)
+ - SSH Key: ???
+ - Ubuntu 18.04
+ - Apache2 2.4.29
+ - MySQL 5.7.25
+ - PHP 7.2.15
 
 ## Tools
  - Development: [PhpStorm](https://www.jetbrains.com/phpstorm/) (using VCS).
@@ -18,6 +22,7 @@
 
 ## WordPress
  - Version: ?
- - [Administration](#a)
+ - [Administration](https://notdotcom.fun/wp-admin/)
    - Username: *???*
    - Password: *???*
+ - Theme: [Underscores](https://underscores.me/)
