@@ -1,3 +1,14 @@
+#
+#  .gitignore file for a2-cp3402-2019-team10
+# 
+#  Files to be excluded from the repository
+#  
+#  Note: you can also list files to be excluded 
+#        only from your own copy of the repository
+#        these should be listed in the file 
+#        .git/info/exclude
+#
+#    
 twentysixteen/
 twentyseventeen/
 twentynineteen/
