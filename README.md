@@ -23,6 +23,6 @@
 ## WordPress
  - Version: ?
  - [Administration](https://notdotcom.fun/wp-admin/)
-   - Username: *???*
-   - Password: *???*
+   - Username: *???*  \
+   - Password: *???*  - Password should not be stored in a public file
  - Theme: [Underscores](https://underscores.me/)
