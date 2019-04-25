@@ -40,7 +40,7 @@
  - Initially, install WordPress on your development environment.  
  - Issue the following commands to clone the github repository into your development environment's wordpress installation 
    - Change into the wp-content/themes directory
-     - `cd `<WordPress-installation-directory>`/wp-content/themes`
+     - `cd `<WordPress-installation-directory>`/wp-content/`
    - Create an empty git repository
      - `git init`
    - Set the github repository as a remote repository
