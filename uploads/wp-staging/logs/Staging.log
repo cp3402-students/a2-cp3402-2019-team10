@@ -1,0 +1,260 @@
+[INFO]-[2019/04/22 01:57:52] DB Copy: Creating table wpstg0_commentmeta
+[INFO]-[2019/04/22 01:57:52] DB Copy: Creating table wpstg0_commentmeta
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_comments
+[INFO]-[2019/04/22 01:57:53] DB Copy: wp_comments as wpstg0_comments from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_comments
+[INFO]-[2019/04/22 01:57:53] DB Copy: wp_comments as wpstg0_comments from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_links
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_links
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_options
+[INFO]-[2019/04/22 01:57:53] DB Copy: wp_options as wpstg0_options from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:53] DB Copy: Creating table wpstg0_options
+[INFO]-[2019/04/22 01:57:53] DB Copy: wp_options as wpstg0_options from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_postmeta
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_postmeta as wpstg0_postmeta from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_postmeta
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_postmeta as wpstg0_postmeta from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_posts
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_posts as wpstg0_posts from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_posts
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_posts as wpstg0_posts from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_term_relationships
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_term_relationships as wpstg0_term_relationships from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_term_relationships
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_term_relationships as wpstg0_term_relationships from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_term_taxonomy
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_term_taxonomy as wpstg0_term_taxonomy from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_term_taxonomy
+[INFO]-[2019/04/22 01:57:54] DB Copy: wp_term_taxonomy as wpstg0_term_taxonomy from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_termmeta
+[INFO]-[2019/04/22 01:57:54] DB Copy: Creating table wpstg0_termmeta
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_terms
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_terms as wpstg0_terms from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_terms
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_terms as wpstg0_terms from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_usermeta
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_usermeta as wpstg0_usermeta from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_usermeta
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_usermeta as wpstg0_usermeta from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_users
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_users as wpstg0_users from 0 to 10000 records
+[INFO]-[2019/04/22 01:57:55] DB Copy: Creating table wpstg0_users
+[INFO]-[2019/04/22 01:57:55] DB Copy: wp_users as wpstg0_users from 0 to 10000 records
+[]-[] 
+[]-[] 
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_comments 0 to 5000 records
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_comments 0 to 5000 records
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_options 0 to 5000 records
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_options 0 to 5000 records
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_postmeta 0 to 5000 records
+[INFO]-[2019/04/22 01:57:56] DB Processing:  Table wpstg0_postmeta 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_posts 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_posts 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_term_relationships 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_term_relationships 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_term_taxonomy 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_term_taxonomy 0 to 5000 records
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_terms 0 to 5000 records
+[INFO]-[2019/04/22 01:57:57] DB Processing:  Table wpstg0_terms 0 to 5000 records
+[INFO]-[2019/04/22 01:57:58] DB Processing:  Table wpstg0_usermeta 0 to 5000 records
+[INFO]-[2019/04/22 01:57:58] DB Processing:  Table wpstg0_usermeta 0 to 5000 records
+[INFO]-[2019/04/22 01:57:58] DB Processing:  Table wpstg0_users 0 to 5000 records
+[INFO]-[2019/04/22 01:57:58] DB Processing:  Table wpstg0_users 0 to 5000 records
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:57:58] Scanning / for files
+[INFO]-[2019/04/22 01:57:58] Scanning / for files
+[INFO]-[2019/04/22 01:57:58] Scanning wp-content folder /var/www/html/wp/wp-content
+[INFO]-[2019/04/22 01:57:58] Scanning wp-content folder /var/www/html/wp/wp-content
+[INFO]-[2019/04/22 01:57:59] Scanning /wp-includes for its sub-directories and files
+[INFO]-[2019/04/22 01:57:59] Scanning /wp-includes for its sub-directories and files
+[INFO]-[2019/04/22 01:57:59] Scanning /wp-admin for its sub-directories and files
+[INFO]-[2019/04/22 01:57:59] Scanning /wp-admin for its sub-directories and files
+[INFO]-[2019/04/22 01:57:59] Copying files...
+[INFO]-[2019/04/22 01:57:59] Total 50 files processed
+[INFO]-[2019/04/22 01:57:59] Copying files...
+[INFO]-[2019/04/22 01:57:59] Total 50 files processed
+[INFO]-[2019/04/22 01:58:00] Total 100 files processed
+[INFO]-[2019/04/22 01:58:00] Total 100 files processed
+[INFO]-[2019/04/22 01:58:00] Total 150 files processed
+[INFO]-[2019/04/22 01:58:00] Total 150 files processed
+[INFO]-[2019/04/22 01:58:00] Total 200 files processed
+[INFO]-[2019/04/22 01:58:00] Total 200 files processed
+[INFO]-[2019/04/22 01:58:00] Total 250 files processed
+[INFO]-[2019/04/22 01:58:00] Total 250 files processed
+[INFO]-[2019/04/22 01:58:00] Total 300 files processed
+[INFO]-[2019/04/22 01:58:00] Total 300 files processed
+[INFO]-[2019/04/22 01:58:01] Total 350 files processed
+[INFO]-[2019/04/22 01:58:01] Total 350 files processed
+[INFO]-[2019/04/22 01:58:01] Total 400 files processed
+[INFO]-[2019/04/22 01:58:01] Total 400 files processed
+[INFO]-[2019/04/22 01:58:01] Total 450 files processed
+[INFO]-[2019/04/22 01:58:01] Total 450 files processed
+[INFO]-[2019/04/22 01:58:01] Total 500 files processed
+[INFO]-[2019/04/22 01:58:01] Total 500 files processed
+[INFO]-[2019/04/22 01:58:01] Total 550 files processed
+[INFO]-[2019/04/22 01:58:01] Total 550 files processed
+[INFO]-[2019/04/22 01:58:02] Total 600 files processed
+[INFO]-[2019/04/22 01:58:02] Total 600 files processed
+[INFO]-[2019/04/22 01:58:02] Total 650 files processed
+[INFO]-[2019/04/22 01:58:02] Total 650 files processed
+[INFO]-[2019/04/22 01:58:02] Total 700 files processed
+[INFO]-[2019/04/22 01:58:02] Total 700 files processed
+[INFO]-[2019/04/22 01:58:02] Trying to copy big file: /var/www/html/wp/wp-content/uploads/2012/07/originaldixielandjazzbandwithalbernard-stlouisblues.mp3 -> /var/www/html/wp/staging/wp-content/uploads/2012/07/originaldixielandjazzbandwithalbernard-stlouisblues.mp3
+[INFO]-[2019/04/22 01:58:02] Total 750 files processed
+[INFO]-[2019/04/22 01:58:02] Trying to copy big file: /var/www/html/wp/wp-content/uploads/2012/07/originaldixielandjazzbandwithalbernard-stlouisblues.mp3 -> /var/www/html/wp/staging/wp-content/uploads/2012/07/originaldixielandjazzbandwithalbernard-stlouisblues.mp3
+[INFO]-[2019/04/22 01:58:02] Total 750 files processed
+[INFO]-[2019/04/22 01:58:02] Total 800 files processed
+[INFO]-[2019/04/22 01:58:02] Total 800 files processed
+[INFO]-[2019/04/22 01:58:03] Total 850 files processed
+[INFO]-[2019/04/22 01:58:03] Total 850 files processed
+[INFO]-[2019/04/22 01:58:03] Skipping big file: /var/www/html/wp/wp-content/uploads/2013/12/2014-slider-mobile-behavior.mov
+[INFO]-[2019/04/22 01:58:03] Total 900 files processed
+[INFO]-[2019/04/22 01:58:03] Skipping big file: /var/www/html/wp/wp-content/uploads/2013/12/2014-slider-mobile-behavior.mov
+[INFO]-[2019/04/22 01:58:03] Total 900 files processed
+[INFO]-[2019/04/22 01:58:03] Total 950 files processed
+[INFO]-[2019/04/22 01:58:03] Total 950 files processed
+[INFO]-[2019/04/22 01:58:04] Total 1000 files processed
+[INFO]-[2019/04/22 01:58:04] Total 1000 files processed
+[INFO]-[2019/04/22 01:58:05] Total 1050 files processed
+[INFO]-[2019/04/22 01:58:05] Total 1050 files processed
+[INFO]-[2019/04/22 01:58:05] Total 1100 files processed
+[INFO]-[2019/04/22 01:58:05] Total 1100 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1150 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1150 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1200 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1200 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1250 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1250 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1300 files processed
+[INFO]-[2019/04/22 01:58:06] Total 1300 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1350 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1350 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1400 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1400 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1450 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1450 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1500 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1500 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1550 files processed
+[INFO]-[2019/04/22 01:58:07] Total 1550 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1600 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1600 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1650 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1650 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1700 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1700 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1750 files processed
+[INFO]-[2019/04/22 01:58:08] Total 1750 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1800 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1800 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1850 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1850 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1900 files processed
+[INFO]-[2019/04/22 01:58:09] Total 1900 files processed
+[INFO]-[2019/04/22 01:58:10] Total 1950 files processed
+[INFO]-[2019/04/22 01:58:10] Total 1950 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2000 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2000 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2050 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2050 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2100 files processed
+[INFO]-[2019/04/22 01:58:10] Total 2100 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2150 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2150 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2200 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2200 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2250 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2250 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2300 files processed
+[INFO]-[2019/04/22 01:58:11] Total 2300 files processed
+[WARNING]-[2019/04/22 01:58:11] File doesn't exist /var/www/html/wp/
+[WARNING]-[2019/04/22 01:58:11] File doesn't exist /var/www/html/wp/
+[INFO]-[2019/04/22 01:58:12] Copying files finished
+[INFO]-[2019/04/22 01:58:12] Copying files finished
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step0: Copy wp-config.php file
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step0: Skip it
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step0: Copy wp-config.php file
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step0: Skip it
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step1: Updating siteurl and homeurl in wpstg0_options 
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step1: Updating siteurl and homeurl to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step1: Updating siteurl and homeurl in wpstg0_options 
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step1: Updating siteurl and homeurl to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step2: Updating row wpstg_is_staging_site in wpstg0_options 
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step2: Successfull
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step2: Updating row wpstg_is_staging_site in wpstg0_options 
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step2: Successfull
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step3: Updating rewrite_rules in wpstg0_options 
+[INFO]-[2019/04/22 01:58:12] Preparing Data Step3: Updating rewrite_rules in wpstg0_options 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step4: Updating db prefix in wpstg0_usermeta. 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step4: Updating db prefix in wpstg0_usermeta. 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step5: Updating table_prefix in /var/www/html/wp/staging/wp-config.php to wpstg0_
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step5: Updating table_prefix in /var/www/html/wp/staging/wp-config.php to wpstg0_
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step7: Updating wpstg_rmpermalinks_executed in wpstg0_options 
+[WARNING]-[2019/04/22 01:58:13] Failed to update wpstg_rmpermalinks_executed in wpstg0_options 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step7: Updating wpstg_rmpermalinks_executed in wpstg0_options 
+[WARNING]-[2019/04/22 01:58:13] Failed to update wpstg_rmpermalinks_executed in wpstg0_options 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step8: Updating permalink_structure in wpstg0_options 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step8: Finished successfully
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step8: Updating permalink_structure in wpstg0_options 
+[INFO]-[2019/04/22 01:58:13] Preparing Data Step8: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step9: Set staging site to noindex
+[WARNING]-[2019/04/22 01:58:14] Can not update staging site to noindex. Possible already done!
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step9: Set staging site to noindex
+[WARNING]-[2019/04/22 01:58:14] Can not update staging site to noindex. Possible already done!
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step10: Updating WP_HOME in wp-config.php to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step10: WP_HOME not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 10: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step10: Updating WP_HOME in wp-config.php to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step10: WP_HOME not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 10: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step11: Updating WP_SITEURL in wp-config.php to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step11: WP_SITEURL not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 11: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step11: Updating WP_SITEURL in wp-config.php to https://notdotcom.fun/staging
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step11: WP_SITEURL not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 11: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step12: Updating db prefix in wpstg0_options.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 12: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step12: Updating db prefix in wpstg0_options.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step 12: Finished successfully
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step13: Updating upload_path wpstg0_options.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step13: Skipped
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step13: Updating upload_path wpstg0_options.
+[INFO]-[2019/04/22 01:58:14] Preparing Data Step13: Skipped
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step14: Set WP_CACHE in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step14: WP_CACHE not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 14: Finished successfully
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step14: Set WP_CACHE in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step14: WP_CACHE not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 14: Finished successfully
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step15: Set WP_CONTENT_DIR in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step15: WP_CONTENT_DIR not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 15: Finished successfully
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step15: Set WP_CONTENT_DIR in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step15: WP_CONTENT_DIR not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 15: Finished successfully
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step16: Set WP_CONTENT_URL in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step16: WP_CONTENT_URL not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 16: Finished successfully
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step16: Set WP_CONTENT_URL in wp-config.php to false
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step16: WP_CONTENT_URL not defined in wp-config.php. Skipping this step.
+[INFO]-[2019/04/22 01:58:15] Preparing Data Step 16: Finished successfully
+[]-[] 
+[]-[] 
+[INFO]-[2019/04/22 01:58:15] Finish: Deleting clone job's cache files...
+[INFO]-[2019/04/22 01:58:15] Finish: Clone job's cache files have been deleted!
+[INFO]-[2019/04/22 01:58:15] Finish: Verifying existing clones...
+[INFO]-[2019/04/22 01:58:15] Finish: Staging's clone job's data is not in database, generating data
+[INFO]-[2019/04/22 01:58:15] Finish: Deleting clone job's cache files...
+[INFO]-[2019/04/22 01:58:15] Finish: Clone job's cache files have been deleted!
+[INFO]-[2019/04/22 01:58:15] Finish: Verifying existing clones...
+[INFO]-[2019/04/22 01:58:15] Finish: Staging's clone job's data is not in database, generating data
