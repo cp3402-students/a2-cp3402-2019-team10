@@ -1,4 +1,7 @@
-# CP3402 2019 - Assignment 2 - Team 10
+# The Coffee Can Cafe
+*JCU Cairns, 2019 SP1, CP3402, Assignment 2, Team 10*
+
+## Authors
  - [Matthew Livingston](https://github.com/blubrick)
  - Ady (Ye Thiha Aung)
  - Ankit Kumar
@@ -7,36 +10,37 @@
  - Stephen Ohl
 
 ## Server
- - Domain: [notdotcom.fun](https://notdotcom.fun/)
-   - Also resolves as https://www.notdotcom.fun and https://cp3402.notdotcom.fun 
+ - Domain: [cp3402.notdotcom.fun](https://cp3402.notdotcom.fun/)
  - Address: [139.162.34.109](139.162.34.109)
- - SSH Key: ???
  - Ubuntu 18.04
- - Apache2 2.4.29
+ - Apache 2.4.29
  - MySQL 5.7.25
  - PHP 7.2.15
 
 ## Tools
- - Development: [PhpStorm](https://www.jetbrains.com/phpstorm/) (using VCS).
- - Collaboration: 
-   - [Slack + Github Integration](https://slack.github.com/).
-   - [Trello](https://trello.com/b/CXd946x3/scrum-board).
- - Deployment: Git Auto Deploy.
+ - Development:
+   - [PhpStorm](https://www.jetbrains.com/phpstorm/)
+ - Collaboration:
+   - [Slack](https://itatjcu.slack.com/messages/GA1QLQCEB/)
+   - [GitHub](https://github.com/cp3402-students/a2-cp3402-2019-team10/)
+   - [Slack + Github Integration](https://slack.github.com/)
+   - [Trello](https://trello.com/b/CXd946x3/scrum-board)
+ - Deployment:
+   - Git Auto Deploy.
 
 ## WordPress
  - Version: 5.1.1
  - [Administration](https://notdotcom.fun/wp-admin/)
-   - Username: *???*  
-   - Password: *???*  - Userids/Passwords should not be stored in public files
  - Theme: [Underscores](https://underscores.me/)
  - [Production Site](https://notdotcom.fun/wp/)
-   - Database name: prod
+   - Database name: `prod`
  - [Staging Site](https://notdotcom.fun/staging/)
-   - Database name: staging 
- 
+   - Database name: `staging`
+ - Plugins:
+   - [TODO](#)
 
 ## Workflow
- The following instructions are based on using basic Unix commandline tools.  If you are using a graphical interface to git, you will need to adjust these instructions accordingly. 
+The following instructions are based on using basic Unix commandline tools.  If you are using a graphical interface to git, you will need to adjust these instructions accordingly. 
  - Initially, install WordPress on your development environment.  
  - Issue the following commands to clone the github repository into your development environment's wordpress installation 
    - Change into the wp-content/themes directory
@@ -63,9 +67,9 @@
      - `git push` 
 
 ## Deployment
- - Log in to your_username`@cp3402.notdotcom.fun` via ssh
- - run the command `cp3402deploy`.  This command:
-   - changes to the staging site's `wp-content/themes/` directory
-   - performs a `git pull` to sync the local repository with the version stored on github
-   - Prints a message containing the URL of the site
+ - Log in to `your_username@cp3402.notdotcom.fun` via SSH.
+ - Run the command `cp3402deploy` which performs the following:
+   - Changes to the staging site's `wp-content/themes/` directory.
+   - Performs a `git pull` to sync the local repository with the version stored on github.
+   - Prints a message containing the URL of the site.
    
