@@ -7,7 +7,7 @@
  - Ankit Kumar
  - [Yvan Burrie](https://github.com/jc444304)
  - [Anthony Vincin](https://github.com/AnthonyV01)
- - Stephen Ohl
+ - [Stephen Ohl](https://github.com/StephenOhl)
 
 ## Server
  - Domain: [cp3402.notdotcom.fun](https://cp3402.notdotcom.fun/)
