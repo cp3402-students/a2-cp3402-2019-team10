@@ -1,5 +1,12 @@
 ﻿# Development
 
+## Social media
+ - [Facebook](https://www.facebook.com/Mycoffeecan/)
+   - Our main place to post events including Fruity Friday.
+ - [Instagram](#)
+ - [Uber Eats](https://www.ubereats.com/en-AU/cairns/food-delivery/the-coffee-can-cafe/Z5fzwV5gTc2YpO0VeUgFpg/)
+ - [Skip](https://www.skip.com.au/) (app)
+
 ## Notes from the client's talk
 
 **The branches of the cafe**
@@ -19,6 +26,7 @@
  - We finally have our van fully busy.
  - Customers from the van know they can pre-order.
  - We're happy to perform catering for people.
+ - We'd like people to enquire to us.
 
 **Notes regarding events**
  - We'd like to make our cafe a club for the local community for people to socialize.
