@@ -1,6 +1,8 @@
 <pre>
 <?php
 
+error_reporting(E_ALL);
+
 class Repository {
 
     public $id = 0;
@@ -45,8 +47,8 @@ class Repository {
     }
 }
 
-$REPOSITORIES = new SplDoublyLinkedList();
-$REPOSITORIES.add(new Repository(
+$REPOSITORIES = array();
+$REPOSITORIES[] = new Repository(
     180477181,
     'a2-cp3402-2019-team10',
     '/var/www/html/staging/wp-content',
@@ -54,9 +56,9 @@ $REPOSITORIES.add(new Repository(
     'staging',
     'cp3402',
     'Q29mZmVlQ2FuLjM0MDI=',
-    '/var/www/html/staging/base_dump'));
+    '/var/www/html/staging/base_dump');
 
-$LOG = "\n" . str_val($_POST) . "\n";
+$LOG = "\n" . strval($_POST) . "\n";
 
 $repository = &$_POST['repository'];
 if( is_array($repository) ){
@@ -102,7 +104,8 @@ if( is_array($repository) ){
     }
 }
 
-file_put_contents('hook2.txt', $LOG);
+var_dump($LOG);
+file_put_contents('hook.txt', $LOG);
 
 ?>
 </pre>
