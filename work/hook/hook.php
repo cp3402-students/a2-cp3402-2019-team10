@@ -11,11 +11,12 @@ class Repository {
     public $db_user = NULL;
     public $db_pass = NULL;
 
-    public function __construct($id, $name, $path, $base, $db_user, $db_pass) {
+    public function __construct($id, $name, $path, $base, $db_name, $db_user, $db_pass) {
         $this->id   = $id;
         $this->name = $name;
         $this->path = $path;
         $this->base = $base;
+        $this->db_name = $db_name;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
     }
