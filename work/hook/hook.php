@@ -24,7 +24,8 @@ class Repository {
     }
 
     public function pull() {
-        print('Attempting to pull repo.');
+        global $LOG;
+        $LOG .= 'Attempting to pull repo.' . "\n";
         /* Redirect to repo path: */
         if( $this->path !== NULL ){
             system('cd ' . $this->path);
@@ -34,7 +35,8 @@ class Repository {
     }
 
     public function pullSql() {
-        print('Attempting to pull database.');
+        global $LOG;
+        $LOG .= 'Attempting to pull database.' . "\n";
         /* Export old database: */
         system('mysqldump ' . $this->db_name . ' --password=' . base64_decode($this->db_pass) . ' --user=' . $this->db_user . ' --single-transaction >' . $this->db_dump . '.sql 2> ' . $this->db_dump . '.err', $output);
         return;
@@ -54,23 +56,23 @@ $REPOSITORIES.add(new Repository(
     'Q29mZmVlQ2FuLjM0MDI=',
     '/var/www/html/staging/base_dump'));
 
-ob_clean();
+$LOG = "\n";
 
 $repository = &$_POST['repository'];
 if( is_array($repository) ){
-    print('Key "repository" exists.' . "\n");
+    $LOG .= 'Key "repository" exists.' . "\n";
     $repository_id   = &$repository['id'];
     $repository_name = &$repository['name'];
     if( is_integer($repository_id) && is_string($repository_name) ){
-        print('Keys "id" (' . $repository_id . ') and "name" (' . $repository_name . ') both exist.' . "\n");
+        $LOG .= 'Keys "id" (' . $repository_id . ') and "name" (' . $repository_name . ') both exist.' . "\n" . "\n";
         foreach( $REPOSITORIES as $i => $repo ){
-            print('Checking repository ' . $i . ' of ' . count($REPOSITORIES) . '.');
+            $LOG .= 'Checking repository ' . $i . ' of ' . count($REPOSITORIES) . '.' . "\n";
             /* Verify whether the request matches any repos: */
             if( $repo->id != $repository_id || $repo->name != $repository_name ) continue;
             /* Pull repo upon push request: */
             $pusher = &$_POST['pusher'];
             if( is_array($pusher) ){
-                print('Pusher is present.');
+                $LOG .= 'Pusher is present.' . "\n";
                 $repo->pull();
             }
             $base_found = false;
@@ -78,18 +80,18 @@ if( is_array($repository) ){
             $commits = &$_POST['commits'];
             if( is_array($commits) ){
                 foreach( $commits as $j => $commit ){
-                    print('Iterating commit ' . $j . ' of ' . count($commits) . '.');
+                    $LOG .= 'Iterating commit ' . $j . ' of ' . count($commits) . '.' . "\n";
                     if( !is_array($commit) ) continue;
                     $commit_files = &$commit['modified'];
                     if( !is_array($commit_files) ){
                         $commit_files = &$commit['added'];
                     }
                     foreach( $commit_files as $k => $commit_file ){
-                        print('Iterating file (' . $commit_file . ') ' . $k . ' of ' . count($commit_files) . '.');
+                        $LOG .= 'Iterating file (' . $commit_file . ') ' . $k . ' of ' . count($commit_files) . '.' . "\n";
                         if( !is_string($commit_file) ) continue;
                         /* Check if the file is the SQL backup file: */
                         if( !$base_found && $repo->base == $commit_file ){
-                            print('Database file is present.');
+                            $LOG .= 'Database file is present.' . "\n";
                             $base_found = true;
                             $repo->pullSql();
                         }
@@ -100,7 +102,7 @@ if( is_array($repository) ){
     }
 }
 
-file_put_contents('hook.txt', ob_get_contents());
+file_put_contents('hook.txt', $LOG);
 
 ?>
 </pre>
