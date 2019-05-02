@@ -7,12 +7,17 @@ class Repository {
     public $name = NULL;
     public $path = NULL;
     public $base = NULL;
+    public $db_name = NULL;
+    public $db_user = NULL;
+    public $db_pass = NULL;
 
-    public function __construct($id, $name, $path, $base) {
+    public function __construct($id, $name, $path, $base, $db_user, $db_pass) {
         $this->id   = $id;
         $this->name = $name;
         $this->path = $path;
         $this->base = $base;
+        $this->db_user = $db_user;
+        $this->db_pass = $db_pass;
     }
 
     public function pull() {
@@ -21,13 +26,21 @@ class Repository {
         }
         system('git pull > git-pull.out 2> git-pull.err');
     }
+
+    public function pullSql() {
+        system('mysqldump ' . $this->db_name . ' --password=' . base64_decode($this->db_pass) . ' --user=' . $this->db_user . ' --single-transaction >/var/www/html/staging/base_dump.sql 2> /var/www/html/staging/base_dump.err', $output);
+    }
 }
 
 $REPOSITORIES = new SplDoublyLinkedList();
 $REPOSITORIES.add(new Repository(
     180477181,
-    "a2-cp3402-2019-team10",
-    '/var/www/html/staging/wp-content'));
+    'a2-cp3402-2019-team10',
+    '/var/www/html/staging/wp-content',
+    'dbdump.sql',
+    'staging',
+    'Q29mZmVlQ2FuLjM0MDI=',
+    'CoffeeCan.3402'));
 
 $post_repository = &$_POST['repository'];
 if( is_array($post_repository) ){
@@ -53,10 +66,11 @@ if( is_array($post_repository) ){
                         $post_repository_commit_files = &$post_repository_commit['added'];
                     }
                     foreach( $post_repository_commit_files as $post_repository_commit_file ){
+                        if( !is_string($post_repository_commit_file) ) continue;
                         /* Check if the file is the SQL backup file: */
                         if( !$base_found && $repo->base == $post_repository_commit_file ){
                             $base_found = true;
-                            system('mysqldump staging --password=CoffeeCan.3402 --user=cp3402 --single-transaction >/var/www/html/staging/base_dump.sql 2> /var/www/html/staging/base_dump.err', $output);
+                            $repo->pullSql();
                         }
                     }
                 }
