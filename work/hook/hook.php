@@ -102,7 +102,7 @@ if( is_array($repository) ){
     }
 }
 
-file_put_contents('hook.txt', $LOG);
+file_put_contents('hook2.txt', $LOG);
 
 ?>
 </pre>
