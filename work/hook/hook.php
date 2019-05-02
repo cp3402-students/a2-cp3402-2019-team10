@@ -21,6 +21,11 @@ class Repository {
     }
 }
 
+$REPOSITORIES = new SplDoublyLinkedList();
+$REPOSITORIES.add(new Repository(
+    180477181,
+    "a2-cp3402-2019-team10",
+    '/var/www/html/staging/wp-content'));
 
 var_dump($_POST);
 file_put_contents('hook.txt', $_POST);
