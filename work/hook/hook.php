@@ -56,7 +56,7 @@ $REPOSITORIES.add(new Repository(
     'Q29mZmVlQ2FuLjM0MDI=',
     '/var/www/html/staging/base_dump'));
 
-$LOG = "\n" . str_val($_POST);
+$LOG = "\n" . str_val($_POST) . "\n";
 
 $repository = &$_POST['repository'];
 if( is_array($repository) ){
