@@ -12,11 +12,12 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.5.1
+ * @version 3.5.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
+do_action( 'woocommerce_before_reset_password_form' );
 ?>
 
 <form method="post" class="woocommerce-ResetPassword lost_reset_password">
@@ -41,9 +42,12 @@ defined( 'ABSPATH' ) || exit;
 
 	<p class="woocommerce-form-row form-row">
 		<input type="hidden" name="wc_reset_password" value="true" />
-		<button type="submit" class="btn btn-outline-primary" value="<?php esc_attr_e( 'Save', 'understrap' ); ?>"><?php esc_html_e( 'Save', 'understrap' ); ?></button>
+		<button type="submit" class="woocommerce-Button button" value="<?php esc_attr_e( 'Save', 'understrap' ); ?>"><?php esc_html_e( 'Save', 'understrap' ); ?></button>
 	</p>
 
 	<?php wp_nonce_field( 'reset_password', 'woocommerce-reset-password-nonce' ); ?>
 
 </form>
+<?php
+do_action( 'woocommerce_after_reset_password_form' );
+
