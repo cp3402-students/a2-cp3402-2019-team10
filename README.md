@@ -9,14 +9,14 @@
  - [Stephen Ohl](https://github.com/StephenOhl)
 
 ## Server
- - Domain: [cp3402.notdotcom.fun](https://cp3402.notdotcom.fun/)
+ - Domain: [notdotcom.fun](https://notdotcom.fun/)
  - Address: [139.162.34.109](139.162.34.109)
  - Ubuntu 18.04
  - Apache 2.4.29
  - MySQL 5.7.25
  - PHP 7.2.15
 
-## Tools
+## Workflow
  - Development:
    - [PhpStorm](https://www.jetbrains.com/phpstorm/)
  - Collaboration:
@@ -25,12 +25,15 @@
    - [Slack + Github Integration](https://slack.github.com/)
    - [Trello](https://trello.com/b/CXd946x3/scrum-board)
  - Deployment:
-   - Git Auto Deploy.
+   - [Git](https://git-scm.com/)
+   - [Github webhook](https://github.com/cp3402-students/a2-cp3402-2019-team10/settings/hooks/106278049)
+   - Our own utilities
 
 ## WordPress
- - Version: 5.1.1
- - [Administration](https://notdotcom.fun/wp-admin/)
- - Theme: [Underscores](https://underscores.me/)
+ - Version: [5.1.1](https://wordpress.org/support/wordpress-version/version-5-1-1/)
+ - Themes:
+   - [Underscores](https://underscores.me/)
+   - [Understrap](https://understrap.com/)
  - [Production Site](https://notdotcom.fun/wp/)
    - Database name: `prod`
  - [Staging Site](https://notdotcom.fun/staging/)
