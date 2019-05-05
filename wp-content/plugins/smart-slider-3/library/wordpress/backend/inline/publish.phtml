@@ -1,0 +1,33 @@
+<?php
+$model = new N2SmartsliderSlidersModel();
+$slider = $model->get($sliderid);
+?>
+<div class="n2-table n2-table-fixed n2-ss-slider-publish">
+    <div class="n2-tr">
+        <div class="n2-td n2-first">
+            <div class="n2-h2"><?php n2_e('Shortcode'); ?></div>
+
+            <div class="n2-h4"><?php n2_e('Copy and paste this shortcode into your posts or pages:'); ?></div>
+            <div class="n2-has-copy n2-code n2-ss-slider-shortcode-id" onclick="return selectText(this);">[smartslider3 slider=<?php echo $sliderid; ?>]</div>
+            <br>
+            <?php if(!empty($slider['alias'])): ?>
+                <div class="n2-has-copy n2-code n2-ss-slider-shortcode-alias" onclick="return selectText(this);">[smartslider3 alias="<?php echo $slider['alias']; ?>"]</div>
+            <?php endif; ?>
+        </div>
+        <div class="n2-td">
+            <div class="n2-h2"><?php n2_e('Page or Post editor'); ?></div>
+
+            <div class="n2-h4"><?php n2_e('Insert it into an existing post with the icon:'); ?></div>
+            <img src="<?php echo N2ImageHelper::fixed('$ss$/admin/images/wordpress-publish.png') ?>" alt="Publish slider"/>
+        </div>
+        <div class="n2-td n2-last">
+            <div class="n2-h2"><?php n2_e('PHP code'); ?></div>
+
+            <div class="n2-h4"><?php n2_e('Paste the PHP code into your theme\'s file:'); ?></div>
+            <div class="n2-has-copy n2-code" onclick="return selectText(this);">
+                    &lt;?php <br/>
+                    echo do_shortcode('[smartslider3 slider=<?php echo $sliderid; ?>]');<br/>
+                    ?&gt;</div>
+        </div>
+    </div>
+</div>
