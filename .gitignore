@@ -1,15 +1,28 @@
-#
-#  .gitignore file for a2-cp3402-2019-team10
-# 
-#  Files to be excluded from the repository
-#  
-#  Note: you can also list files to be excluded 
-#        only from your own copy of the repository
-#        these should be listed in the file 
-#        .git/info/exclude
-#
-#    
-twentysixteen/
-twentyseventeen/
-twentynineteen/
-uploads/wp-staging/logs/
+
+license.txt
+readme.html
+
+.htaccess
+
+wp-admin/
+wp-includes/
+
+index.php
+wp-activate.php
+wp-blog-header.php
+wp-comments-post.php
+wp-config.php
+wp-config-sample.php
+wp-cron.php
+wp-links-opml.php
+wp-load.php
+wp-login.php
+wp-mail.php
+wp-settings.php
+wp-signup.php
+wp-trackback.php
+xmlrpc.php
+
+wp-content/themes/twentysixteen/
+wp-content/themes/twentyseventeen/
+wp-content/themes/twentynineteen/
