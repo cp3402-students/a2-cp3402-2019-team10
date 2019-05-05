@@ -1,0 +1,412 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Instagram Gallery\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-15 16:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: insta-gallery.php:95
+msgid "settings updated successfully"
+msgstr ""
+
+#. Name of the plugin
+#: insta-gallery.php:117 app/wp-front.php:144 app/wp-front.php:149
+#: app/wp-panel.php:82 app/wp-widget.php:19
+msgid "Instagram Gallery"
+msgstr ""
+
+#: insta-gallery.php:138
+msgid "Settings"
+msgstr ""
+
+#: app/wp-front.php:339
+msgid "ERROR: invalid display type, please check gallery settings."
+msgstr ""
+
+#: app/wp-front.php:346
+msgid "Instagram account may be private or inavalid username/tagname."
+msgstr ""
+
+#: app/wp-front.php:347
+msgid "network or server side issue."
+msgstr ""
+
+#: app/wp-panel.php:64
+msgid "Gallery item updated successfully."
+msgstr ""
+
+#: app/wp-panel.php:74
+msgid "Gallery item deleted successfully."
+msgstr ""
+
+#: app/wp-panel.php:83
+msgid "easy way to display Instagram pictures on the website."
+msgstr ""
+
+#: app/wp-widget.php:21
+msgid "Displays your Instagram Gallery"
+msgstr ""
+
+#: app/wp-widget.php:55
+msgid "Title"
+msgstr ""
+
+#: app/wp-widget.php:62
+msgid "Select Instagram Gallery"
+msgstr ""
+
+#: app/wp-widget.php:68 app/views/edit.php:47 app/views/list.php:34
+msgid "Username"
+msgstr ""
+
+#: app/wp-widget.php:70 app/views/edit.php:49 app/views/list.php:36
+msgid "Tagname"
+msgstr ""
+
+#: app/wp-widget.php:79
+msgid ""
+"Please add Gallery item in plugin panel, Then come back and select your "
+"Gallery to display."
+msgstr ""
+
+#: app/wp-widget.php:83 app/views/list.php:11 app/views/list.php:11
+msgid "Add New Gallery"
+msgstr ""
+
+#: app/views/edit.php:37
+msgid "View Galleries List"
+msgstr ""
+
+#: app/views/edit.php:37
+msgid "Back to List"
+msgstr ""
+
+#: app/views/edit.php:43
+msgid "Display Instagram Gallery from"
+msgstr ""
+
+#: app/views/edit.php:51
+msgid ""
+"Please select option to display pictures from Instagram Username OR # Tag."
+msgstr ""
+
+#: app/views/edit.php:59
+msgid "Instagram Username"
+msgstr ""
+
+#: app/views/edit.php:65
+msgid "Please enter Instagram Username."
+msgstr ""
+
+#: app/views/edit.php:68 app/views/edit.php:88
+msgid "Pictures Limit"
+msgstr ""
+
+#: app/views/edit.php:70
+msgid "number of pictures to display (max: 12)"
+msgstr ""
+
+#: app/views/edit.php:79
+msgid "Instagram Tagname"
+msgstr ""
+
+#: app/views/edit.php:85
+msgid "Please enter Instagram Tagname."
+msgstr ""
+
+#: app/views/edit.php:90
+msgid "number of pictures to display."
+msgstr ""
+
+#: app/views/edit.php:96
+msgid "Show As"
+msgstr ""
+
+#: app/views/edit.php:99
+msgid "Gallery"
+msgstr ""
+
+#: app/views/edit.php:102
+msgid "Carousel"
+msgstr ""
+
+#: app/views/edit.php:110
+msgid "Pictures will be displayed as Grid."
+msgstr ""
+
+#: app/views/edit.php:114
+msgid "No. of Grid Columns"
+msgstr ""
+
+#: app/views/edit.php:116
+msgid "number of pictures in a row"
+msgstr ""
+
+#: app/views/edit.php:120
+msgid "Image hover effect"
+msgstr ""
+
+#: app/views/edit.php:122
+msgid "mouseover animation effect on image"
+msgstr ""
+
+#: app/views/edit.php:125
+msgid "Space between images"
+msgstr ""
+
+#: app/views/edit.php:127
+msgid "add blank space between images"
+msgstr ""
+
+#: app/views/edit.php:135
+msgid "Pictures will be displayed as Carousel slider."
+msgstr ""
+
+#: app/views/edit.php:139
+msgid "Slides per view"
+msgstr ""
+
+#: app/views/edit.php:141
+msgid "display number of pictures per slide view."
+msgstr ""
+
+#: app/views/edit.php:145
+msgid "Autoplay"
+msgstr ""
+
+#: app/views/edit.php:147
+msgid "autoplay carousel items."
+msgstr ""
+
+#: app/views/edit.php:150
+msgid "Navigation arrows"
+msgstr ""
+
+#: app/views/edit.php:152
+msgid "show prev-next navigation arrows."
+msgstr ""
+
+#: app/views/edit.php:155
+msgid "Navigation arrows color"
+msgstr ""
+
+#: app/views/edit.php:159
+msgid "change navigation arrows color here."
+msgstr ""
+
+#: app/views/edit.php:162
+msgid "Dotted navigation"
+msgstr ""
+
+#: app/views/edit.php:164
+msgid "show dotted navigation buttons."
+msgstr ""
+
+#: app/views/edit.php:165 app/views/edit.php:204
+msgid "Deprecated: this option will be removed in the future updates."
+msgstr ""
+
+#: app/views/edit.php:169
+msgid "Space between slides"
+msgstr ""
+
+#: app/views/edit.php:171
+msgid "add blank space between carousel items."
+msgstr ""
+
+#: app/views/edit.php:177
+msgid "Images thumbnail size"
+msgstr ""
+
+#: app/views/edit.php:179
+msgid "Medium"
+msgstr ""
+
+#: app/views/edit.php:180
+msgid "Small"
+msgstr ""
+
+#: app/views/edit.php:185
+msgid "Images hover effect color"
+msgstr ""
+
+#: app/views/edit.php:188
+msgid "select color which is displayed when hovered over images."
+msgstr ""
+
+#: app/views/edit.php:189
+msgid "color name should be in Hexadecimal notation. e.g. #dddddd"
+msgstr ""
+
+#: app/views/edit.php:193
+msgid "Popup images on click"
+msgstr ""
+
+#: app/views/edit.php:195
+msgid ""
+"show popup gallery by clicking on image thumbnail. else it will open "
+"Instagram page."
+msgstr ""
+
+#: app/views/edit.php:196
+msgid ""
+"uncheck this if it conflicts with other plugins, like: fancybox, prettyphoto "
+"etc."
+msgstr ""
+
+#: app/views/edit.php:200
+msgid "Display image caption"
+msgstr ""
+
+#: app/views/edit.php:202
+msgid "Display caption/tags below images when popup."
+msgstr ""
+
+#: app/views/edit.php:208
+msgid "Display Likes"
+msgstr ""
+
+#: app/views/edit.php:210
+msgid "display likes count of images."
+msgstr ""
+
+#: app/views/edit.php:213
+msgid "Display Comments"
+msgstr ""
+
+#: app/views/edit.php:215
+msgid "display comments count of images."
+msgstr ""
+
+#: app/views/edit.php:218
+msgid "Display Instagram Link Button"
+msgstr ""
+
+#: app/views/edit.php:220
+msgid "show the button to open Instagram site link"
+msgstr ""
+
+#: app/views/edit.php:226
+msgid "Instagram Button Text"
+msgstr ""
+
+#: app/views/edit.php:228
+msgid "update Instagram button text here."
+msgstr ""
+
+#: app/views/edit.php:231
+msgid "Button Background Color"
+msgstr ""
+
+#: app/views/edit.php:235
+msgid "color which is displayed on button background."
+msgstr ""
+
+#: app/views/edit.php:238
+msgid "Button Hover Color"
+msgstr ""
+
+#: app/views/edit.php:242
+msgid "color which is displayed when hovered over button."
+msgstr ""
+
+#: app/views/edit.php:251 app/views/list.php:133
+msgid "Update"
+msgstr ""
+
+#: app/views/edit.php:253
+msgid ""
+"update settings and copy/paste generated shortcode in your post/pages or "
+"goto Widgets and use Instagram Gallery widget."
+msgstr ""
+
+#: app/views/list.php:21
+msgid "Gallery Item"
+msgstr ""
+
+#: app/views/list.php:22
+msgid "Shortcode"
+msgstr ""
+
+#: app/views/list.php:23
+msgid "Action"
+msgstr ""
+
+#: app/views/list.php:41
+msgid "Edit"
+msgstr ""
+
+#: app/views/list.php:42
+msgid "Delete"
+msgstr ""
+
+#: app/views/list.php:53
+msgid "Additional Setting"
+msgstr ""
+
+#: app/views/list.php:61
+msgid "Gallery Loader Icon"
+msgstr ""
+
+#: app/views/list.php:75
+msgid "Update Spinner"
+msgstr ""
+
+#: app/views/list.php:76
+msgid "Reset Spinner"
+msgstr ""
+
+#: app/views/list.php:79
+msgid ""
+"please select the image from media to replace with default Gallery loader "
+"icon."
+msgstr ""
+
+#: app/views/list.php:126
+msgid "Remove everything on uninstall"
+msgstr ""
+
+#: app/views/list.php:128
+msgid ""
+"check this box to remove all data related to this plugin when removing the "
+"plugin."
+msgstr ""
+
+#: app/views/list.php:142
+msgid ""
+"Please Donate now to support the Maintainance and Advancement of this plugin."
+" Thanks"
+msgstr ""
+
+#: app/views/list.php:143
+msgid "Donate"
+msgstr ""
+
+#: app/views/list.php:151
+msgid "Are you sure want to delete this item?"
+msgstr ""
+
+#: app/views/list.php:174
+msgid "please make sure every settings will be removed on plugin uninstall."
+msgstr ""
+
+#. Description of the plugin
+msgid "Display Gallery on the website from Instagram."
+msgstr ""
+
+#. Author of the plugin
+msgid "Karan Singh"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.karansingh.ml/"
+msgstr ""
