@@ -258,13 +258,19 @@ class Database {
         $command .= ' ';
         $command .= '--user=' . $this->user;
         $command .= ' ';
-        $command .= '--single-transaction >' . getcwd() . '\\' . $this->file . '.sql';
+        $backupPath = getcwd() . '\\' . 'backups';
+        $command .= '--single-transaction >' . $backupPath . '\\' . $this->file . '.sql';
         $command .= ' ';
-        $command .= '2> ' . getcwd() . '\\' . $this->file . '.err';
+        $command .= '2> ' . $backupPath . '\\' . $this->file . '.err';
         $this->developer->configurations->log('Attempting to export database with the following command:' . "\n");
         $this->developer->configurations->log("\t" . $command . "\n");
         system($command, $result);
         $this->developer->configurations->log('Command resulted with "' . $result . '".' . "\n");
+        if( file_exists($filePath = $backupPath . '\\' . $this->file . '.sql') ){
+            file_put_contents(
+                $backupPath . '\\' . $this->file . ' ' . time() . ' (' . $this->developer->identifier . ').sql',
+                file_get_contents($filePath));
+        }
     }
 
     /**
