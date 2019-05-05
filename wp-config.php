@@ -26,7 +26,7 @@ define( 'DB_NAME', 'staging' );
 define( 'DB_USER', 'cp3402' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', 'CoffeeCan.3402' );
+define( 'DB_PASSWORD', call_user_func(pack('lsslc', 0x65736162, 0x00003436, 0x645F, 0x646F6365, 0x00000065), 'Q29mZmVlQ2FuLjM0MDI=') );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );
