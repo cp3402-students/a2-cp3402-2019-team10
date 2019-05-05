@@ -7,7 +7,6 @@ readme.html
 wp-admin/
 wp-includes/
 
-index.php
 wp-activate.php
 wp-blog-header.php
 wp-comments-post.php
