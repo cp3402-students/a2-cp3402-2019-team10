@@ -1,27 +1,27 @@
 
-license.txt
-readme.html
+/license.txt
+/readme.html
 
-.htaccess
+/.htaccess
 
-wp-admin/
-wp-includes/
+/wp-admin
+/wp-includes
 
-wp-activate.php
-wp-blog-header.php
-wp-comments-post.php
-wp-config.php
-wp-config-sample.php
-wp-cron.php
-wp-links-opml.php
-wp-load.php
-wp-login.php
-wp-mail.php
-wp-settings.php
-wp-signup.php
-wp-trackback.php
-xmlrpc.php
+/wp-activate.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config.php
+/wp-config-sample.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
 
-wp-content/themes/twentysixteen/
-wp-content/themes/twentyseventeen/
-wp-content/themes/twentynineteen/
+/wp-content/themes/twentysixteen
+/wp-content/themes/twentyseventeen
+/wp-content/themes/twentynineteen
