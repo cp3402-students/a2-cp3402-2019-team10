@@ -38,6 +38,11 @@ class Configurations {
     public $baseName = 'd';
 
     /**
+     * @var array
+     */
+    public $lastBases = [];
+
+    /**
      * @var int
      */
     public $repoId = 0;
@@ -77,7 +82,7 @@ class Configurations {
      * @param string $path
      * @return array
      */
-    public static function convertPath( string $path ){
+    public static function convertPath( string $path ): array {
         return explode('/', str_replace('*', getcwd(), $path));
     }
 
@@ -142,7 +147,7 @@ class Configurations {
      * @param int $developerId
      * @return bool
      */
-    public function handleHook( array $post, int $developerId = 0 ){
+    public function handleHook( array $post, int $developerId = 0 ): bool {
         $this->log('Attempting to hook.')->log();
         if( !isset($post['repository']) ||
             !isset($post['pusher']) ||
@@ -256,28 +261,14 @@ class Developer {
     }
 
     /**
+     * @param string $input
      * @return bool
      */
-    public function push(){
-        $fullPath = implode(DIRECTORY_SEPARATOR, $this->rootPath);
-        $this->configurations->log('Attempting to redirect to:')->log();
-        $this->configurations->log("\t" . '%s', $fullPath)->log();
-        $command = 'cd ' . $fullPath;
-        system($command, $result);
-        if( $result !== 0 ){
-            $this->configurations->log('Directory change failed.')->log();
-            return FALSE;
-        }
-        /** @var string $command */
-        $command = $this->gitPath !== NULL ?
-            '"' . implode(DIRECTORY_SEPARATOR, array_merge($this->gitPath, ['bin', 'git.exe'])) . '"' :
-            'git';
-        $command .= ' ';
-        $command .= 'push origin master';
-        $this->configurations->log('Attempting to push repository with the following command:')->log();
-        $this->configurations->log("\t" . '%s', $command)->log();
-        system($command, $result);
-        if( $result === 0 ){
+    public function doCommand( string $input ): bool {
+        $this->configurations->log('Attempting to run the following command:')->log();
+        $this->configurations->log("\t" . '%s', $input)->log();
+        system($input, $result);
+        if( 0 === $result ){
             $this->configurations->log('Command success.')->log();
             return TRUE;
         }else{
@@ -287,36 +278,80 @@ class Developer {
     }
 
     /**
+     * @param string $path
      * @return bool
      */
-    public function pull() {
-        $fullPath = implode(DIRECTORY_SEPARATOR, $this->rootPath);
+    public function doRedirect( string $path ): bool {
         $this->configurations->log('Attempting to redirect to:')->log();
-        $this->configurations->log("\t" . '%s', $fullPath)->log();
-        $command = 'cd ' . $fullPath;
+        $this->configurations->log("\t" . '%s', $path)->log();
+        $command = 'cd ' . $path;
         system($command, $result);
-        if( $result !== 0 ){
-            $this->configurations->log('Directory change failed.')->log();
+        if( 0 === $result ){
+            $this->configurations->log('Directory change success.')->log();
+            return FALSE;
+        }else{
+            $this->configurations->log('Directory change failure.')->log();
+            return TRUE;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getGitCommandEntry(): string {
+        if( $this->gitPath === NULL ){
+            return 'git';
+        }else{
+            return '"' . implode(DIRECTORY_SEPARATOR, array_merge($this->gitPath, ['bin', 'git.exe'])) . '"';
+        }
+    }
+
+    /**
+     * @param bool $dbExport
+     * @return bool
+     */
+    public function push( bool $dbExport = FALSE ): bool {
+        $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
+        if( $dbExport ){
+            if( FALSE === $this->database->export(TRUE) ||
+                FALSE === $this->doRedirect($path) ){
+                return FALSE;
+            }
+            if( count($this->configurations->lastBases) ){
+                $command = $this->getGitCommandEntry() . ' ';
+                $command .= 'add "' . implode('" "', $this->configurations->lastBases) . '"';
+                if( FALSE === $this->doCommand($command) ){
+                    return FALSE;
+                }
+                $command = $this->getGitCommandEntry() . ' ';
+                $command .= 'commit -m "Update database"';
+                if( FALSE === $this->doCommand($command) ){
+                    return FALSE;
+                }
+            }
+        }
+        if( FALSE === $this->doRedirect($path) ){
+            return FALSE;
+        }
+        $command = $this->getGitCommandEntry() . ' ';
+        $command .= 'push origin master';
+        return $this->doCommand($command);
+    }
+
+    /**
+     * @return bool
+     */
+    public function pull(): bool {
+        $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
+        if( FALSE === $this->doRedirect($path) ){
             return FALSE;
         }
         /** @var string $command */
-        $command = $this->gitPath !== NULL ?
-            '"' . implode(DIRECTORY_SEPARATOR, array_merge($this->gitPath, ['bin', 'git.exe'])) . '"' :
-            'git';
-        $command .= ' ';
+        $command = $this->getGitCommandEntry() . ' ';
         $command .= 'pull > git-pull.txt';
         $command .= ' ';
         $command .= '2> git-pull.err';
-        $this->configurations->log('Attempting to pull repository with the following command:')->log();
-        $this->configurations->log("\t" . '%s', $command)->log();
-        system($command, $result);
-        if( $result === 0 ){
-            $this->configurations->log('Command success.')->log();
-            return TRUE;
-        }else{
-            $this->configurations->log('Command failure.')->log();
-            return FALSE;
-        }
+        return $this->doCommand($command);
     }
 }
 
@@ -359,9 +394,12 @@ class Database {
     }
 
     /**
+     * @param bool $overwrite
      * @return bool
      */
-    public function export(){
+    public function export( bool $overwrite = FALSE ): bool {
+        $filePath1 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
+        $filePath2 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . ' ' . time() . ' (' . $this->developer->identifier . ').sql']));
         /** @var string $command */
         $command = $this->developer->mysqlPath ?
             '"' . implode(DIRECTORY_SEPARATOR, array_merge($this->developer->mysqlPath, ['bin', 'mysqldump.exe'])) . '"' :
@@ -375,34 +413,40 @@ class Database {
         }
         $command .= '--user=' . $this->user;
         $command .= ' ';
-        $filePath = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
-        $command .= '--single-transaction >' . $filePath;
+        $command .= '--single-transaction >' . $filePath2;
         $command .= ' ';
         $command .= '2> ' . implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.err']));
-        $this->configurations->log('Attempting to export database with the following command:')->log();
-        $this->configurations->log('%s%s', "\t", $command)->log();
-        system($command, $result);
-        if( $result === 0 ){
-            $this->configurations->log('Command success.')->log();
-            if( file_exists($filePath) ){
-                file_put_contents(
-                    $filePath2 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . ' ' . time() . ' (' . $this->developer->identifier . ').sql'])),
-                    file_get_contents($filePath));
-            }
-            return TRUE;
-        }else{
-            $this->configurations->log('Command failure.')->log();
+        if( FALSE === $this->developer->doCommand($command) ){
             return FALSE;
         }
+        if( file_exists($filePath2) ){
+            $this->configurations->log('Database file (%s) exists.', $filePath2)->log();
+            if( $overwrite ){
+                file_put_contents(
+                    $filePath1,
+                    file_get_contents($filePath2));
+                if( file_exists($filePath1) ){
+                    $this->configurations->lastBases[] = $filePath1;
+                }
+            }
+        }
+        return TRUE;
     }
 
     /**
+     * @param bool $export
+     * @param bool $modifyWpUrl
      * @return bool
      */
-    public function import(){
-        $filePath = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
-        if( FALSE === file_exists($filePath) ){
-            $this->configurations->log('Latest database backup file (%s) inexistent.', $filePath)->log();
+    public function import( bool $export = FALSE, bool $modifyWpUrl = FALSE ): bool {
+        if( $export ){
+            if( FALSE === $this->export(FALSE) ){
+                return FALSE;
+            }
+        }
+        $path = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
+        if( FALSE === file_exists($path) ){
+            $this->configurations->log('Latest database backup file (%s) inexistent.', $path)->log();
             return FALSE;
         }
         /** @var string $command */
@@ -418,23 +462,21 @@ class Database {
         }
         $command .= $this->name;
         $command .= ' ';
-        $command .= '< ' . $filePath;
-        $this->configurations->log('Attempting to import database with the following command:')->log();
-        $this->configurations->log('%s%s', "\t", $command)->log();
-        system($command, $result);
-        if( $result === 0 ){
-            $this->configurations->log('Command success.')->log();
-            return TRUE;
-        }else{
-            $this->configurations->log('Command failure.')->log();
+        $command .= '< ' . $path;
+        if( FALSE === $this->developer->doCommand($command) ){
             return FALSE;
+        }
+        if( $modifyWpUrl ){
+            return $this->modifyWpUrl();
+        }else{
+            return TRUE;
         }
     }
 
     /**
      * @return bool
      */
-    public function modifyWpHost(){
+    public function modifyWpUrl(): bool {
         $queries = [
             'UPDATE `wp_options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'siteurl\'',
             'UPDATE `wp_options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'home\'',
@@ -454,15 +496,6 @@ class Database {
         $command .= $this->name;
         $command .= ' ';
         $command .= '-e "' . implode('; ', $queries) . ';"';
-        $this->configurations->log('Attempting to modify WP host with the following command:')->log();
-        $this->configurations->log("%s%s", "\t", $command)->log();
-        system($command, $result);
-        if( $result === 0 ){
-            $this->configurations->log('Command success.')->log();
-            return TRUE;
-        }else{
-            $this->configurations->log('Command failure.')->log();
-            return FALSE;
-        }
+        return $this->developer->doCommand($command);
     }
 }
