@@ -41,7 +41,7 @@
  - Plugins:
    - [TODO](#)
 
-## Workflow
+## Developer setup
 The following instructions are based on using basic Unix commandline tools.  If you are using a graphical interface to git, you will need to adjust these instructions accordingly. 
  - Initially, install WordPress on your development environment.  
  - Issue the following commands to clone the github repository into your development environment's wordpress installation 
@@ -75,3 +75,4 @@ The following instructions are based on using basic Unix commandline tools.  If 
    - Performs a `git pull` to sync the local repository with the version stored on github.
    - Prints a message containing the URL of the site.
    
+test change - push from phpstorm
