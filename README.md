@@ -3,7 +3,7 @@
 
 ## Authors
  - [Matthew Livingston](https://github.com/blubrick)
- - Ady (Ye Thiha Aung)
+ - [Ady (Ye Thiha Aung)](https://github.com/AdyAung)
  - [Yvan Burrie](https://github.com/jc444304)
  - [Anthony Vincin](https://github.com/AnthonyV01)
  - [Stephen Ohl](https://github.com/StephenOhl)
