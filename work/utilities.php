@@ -38,6 +38,11 @@ class Configurations {
     public $baseName = 'd';
 
     /**
+     * @var string
+     */
+    public $baseMsg = 'Update database';
+
+    /**
      * @var array
      */
     public $lastBases = [];
@@ -56,6 +61,11 @@ class Configurations {
      * @var Developer[]
      */
     public $developers = [];
+
+    /**
+     * @var string
+     */
+    public $wpPrefix = 'wp_';
 
     /**
      * @param string|null $message
@@ -117,14 +127,18 @@ class Configurations {
         $buffer1 !== NULL && $this->repoId = (int)$buffer1;
         $buffer1 = &$data['repo_name'];
         $buffer1 !== NULL && $this->repoName = (string)$buffer1;
+        $buffer1 = &$data['wp_prefix'];
+        $buffer1 !== NULL && $this->wpPrefix = (string)$buffer1;
+        $buffer1 = &$data['base_msg'];
+        $buffer1 !== NULL && $this->baseMsg = (string)$buffer1;
         $buffer1 = &$data['developers'];
         if( is_array($buffer1) ){
             foreach( $buffer1 as $bufferKey => $bufferVal ){
-                if( (int)$bufferVal === 0 ) continue;
+                if( FALSE === (bool)(int)$bufferVal ) continue;
                 $developer = new Developer($this, (string)$bufferKey);
                 $developer->database = new MySqlDb($developer);
                 /** @var array|null $buffer2 */
-                $buffer2 =& $data['dev:' . $developer->identifier];
+                $buffer2 = &$data['dev:' . $developer->identifier];
                 if( is_array($buffer2) ){
                     /** @var mixed $buffer3 */
                     $buffer3 = &$buffer2['git_path'];
@@ -180,11 +194,15 @@ class Configurations {
             return FALSE;
         }
         if( count($postedCommits) ){
-            $developer->pull();
+            if( FALSE === $developer->pull() ){
+                return FALSE;
+            }
         }
         foreach( $postedCommits as $postedCommitId => $postedCommit ){
             $this->log('Iterating commit %d of %d.', $postedCommitId, count($postedCommits))->log();
-            if( FALSE === is_array($postedCommit) ) continue;
+            if( FALSE === is_array($postedCommit) ){
+                continue;
+            }
             $postedCommitFiles = [];
             if( is_array($postedCommitFiles1 = &$postedCommit['modified']) ){
                 $postedCommitFiles = array_merge($postedCommitFiles, $postedCommitFiles1);
@@ -199,7 +217,9 @@ class Configurations {
                 $this->log("\t" . 'Checking %s.', $filePath)->log();
                 if( $filePath == $postedCommitFileName ){
                     $this->log("\t" . 'Database dump file was finally found.')->log();
-                    $developer->database->import(FALSE);
+                    if( FALSE === $developer->database->import(FALSE) ){
+                        return FALSE;
+                    }
                     break 2;
                 }
             }
@@ -352,7 +372,7 @@ class Developer {
                 if( FALSE === $this->{'git'}($command) ){
                     return FALSE;
                 }
-                $command = 'commit -m "Update database"';
+                $command = 'commit -m "' . $this->configurations->baseMsg . '"';
                 if( FALSE === $this->{'git'}($command) ){
                     return FALSE;
                 }
@@ -515,12 +535,12 @@ class MySqlDb extends Database {
     public function modifyWpUrl(): bool {
         /** @var string[] $queries */
         $queries = [
-            'UPDATE `wp_options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'siteurl\'',
-            'UPDATE `wp_options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'home\'',
+            'UPDATE `' . $this->configurations->wpPrefix . 'options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'siteurl\'',
+            'UPDATE `' . $this->configurations->wpPrefix . 'options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'home\'',
         ];
         /** @var string $command */
         $command = '-u ' . $this->user . ' ';
-        if( $this->pass !== NULL ){
+        if( NULL !== $this->pass ){
             $command .= '-p ' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
