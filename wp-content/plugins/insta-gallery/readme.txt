@@ -1,4 +1,4 @@
-=== Instagram Gallery ===
+=== Instagram Feed Gallery ===
 Contributors: quadlayers
 Tags: instagram, instagram feed, instagram widget, gallery widget, pictures, carousel slider, image gallery, image slider, instagram gallery, instagram pictures
 Requires at least: 3.8.0
@@ -70,6 +70,13 @@ this error visible sometimes in PHP 7+ installations due to the missing CURL ext
 5. Gallery Widget
 
 == Changelog ==
+
+= 2.2.1 =
+* uninstall improvement
+
+= 2.2.0 =
+* author change
+
 = 2.1.9 =
 * minor code changes
 
