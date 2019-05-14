@@ -1,5 +1,5 @@
 # The Coffee Can Cafe
-*JCU Cairns, 2019 SP1, CP3402, Assignment 2, Team 10*
+*JCU Cairns, 2019 SP1, CP3402 A2, Team 10*
 
 ## Authors
  - [Matthew Livingston](https://github.com/blubrick)
@@ -23,23 +23,26 @@
    - [Slack](https://itatjcu.slack.com/messages/GA1QLQCEB/)
    - [GitHub](https://github.com/cp3402-students/a2-cp3402-2019-team10/)
    - [Slack + Github Integration](https://slack.github.com/)
-   - [Trello](https://trello.com/b/CXd946x3/scrum-board)
+   - ~~[Trello](https://trello.com/b/CXd946x3/scrum-board)~~: Using GitHub projects as of 9th of May (see below)...
+   - [Github Projects](https://github.com/cp3402-students/a2-cp3402-2019-team10/projects)
  - Deployment:
-   - [Git](https://git-scm.com/)
+   - [Git](https://git-scm.com/): via command line, PhpStorm VCS, GitHub Desktop, etc...
    - [Github webhook](https://github.com/cp3402-students/a2-cp3402-2019-team10/settings/hooks/106278049)
-   - Our own utilities
+   - [Our own utility](https://github.com/cp3402-students/a2-cp3402-2019-team10/blob/master/work/index.php)
 
 ## WordPress
  - Version: [5.1.1](https://wordpress.org/support/wordpress-version/version-5-1-1/)
  - Themes:
-   - [Underscores](https://underscores.me/)
    - [Understrap](https://understrap.com/)
  - [Production Site](https://notdotcom.fun/wp/)
    - Database name: `prod`
  - [Staging Site](https://notdotcom.fun/staging/)
    - Database name: `staging`
  - Plugins:
-   - [TODO](#)
+   - [WooCommerce](https://woocommerce.com/)
+   - [WP Forms](https://wpforms.com/)
+   - [Smart Slider](https://smartslider3.com/)
+   - [Instagram Gallery](https://wordpress.org/plugins/insta-gallery/)
 
 ## Developer setup
 The following instructions are based on using basic Unix commandline tools.  If you are using a graphical interface to git, you will need to adjust these instructions accordingly. 

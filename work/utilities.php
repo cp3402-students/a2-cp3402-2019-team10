@@ -73,8 +73,7 @@ class Configurations {
      * @return static
      */
     public function log( string $message = NULL, string ... $extras ){
-        count($params = func_get_args()) ?
-            is_string($string = call_user_func_array('sprintf', $params)) &&
+        count($params = func_get_args()) ? is_string($string = call_user_func_array('sprintf', $params)) &&
             $this->output[] = $string :
             $this->output[] = "\n";
         return $this;
@@ -103,7 +102,7 @@ class Configurations {
     public static function openIni( string $fileName ){
         $that = new static;
         $data = parse_ini_file($fileName, TRUE, INI_SCANNER_RAW);
-        if( is_array($data) ){
+        if( TRUE === is_array($data) ){
             $that->loadIni($data);
         }else{
             $that->log('Failed to read INI file (%s).', $fileName);
@@ -132,14 +131,14 @@ class Configurations {
         $buffer1 = &$data['base_msg'];
         $buffer1 !== NULL && $this->baseMsg = (string)$buffer1;
         $buffer1 = &$data['developers'];
-        if( is_array($buffer1) ){
+        if( TRUE === is_array($buffer1) ){
             foreach( $buffer1 as $bufferKey => $bufferVal ){
                 if( FALSE === (bool)(int)$bufferVal ) continue;
                 $developer = new Developer($this, (string)$bufferKey);
                 $developer->database = new MySqlDb($developer);
                 /** @var array|null $buffer2 */
                 $buffer2 = &$data['dev:' . $developer->identifier];
-                if( is_array($buffer2) ){
+                if( TRUE === is_array($buffer2) ){
                     /** @var mixed $buffer3 */
                     $buffer3 = &$buffer2['git_path'];
                     $buffer3 !== NULL && $developer->gitPath = $this::convertPath((string)$buffer3);
@@ -193,7 +192,7 @@ class Configurations {
             $this->log('Invalid data for committed files.')->log();
             return FALSE;
         }
-        if( count($postedCommits) ){
+        if( count($postedCommits) > 0 ){
             if( FALSE === $developer->pull() ){
                 return FALSE;
             }
@@ -204,18 +203,17 @@ class Configurations {
                 continue;
             }
             $postedCommitFiles = [];
-            if( is_array($postedCommitFiles1 = &$postedCommit['modified']) ){
+            if( TRUE === is_array($postedCommitFiles1 = &$postedCommit['modified']) ){
                 $postedCommitFiles = array_merge($postedCommitFiles, $postedCommitFiles1);
             }
-            if( is_array($postedCommitFiles2 = &$postedCommit['added']) ){
+            if( TRUE === is_array($postedCommitFiles2 = &$postedCommit['added']) ){
                 $postedCommitFiles = array_merge($postedCommitFiles, $postedCommitFiles2);
             }
             foreach( $postedCommitFiles as $postedCommitFileId => $postedCommitFileName ){
                 $this->log("\t" . 'Iterating committed file (%s) %d of %d.', $postedCommitFileName, $postedCommitFileId, count($postedCommitFiles))->log();
-                $filePath = implode('/', array_merge($developer->rootPath, [$this->baseName . '.sql']));
-                $filePath = str_replace(getcwd(), '', $filePath);
-                $this->log("\t" . 'Checking %s.', $filePath)->log();
-                if( $filePath == $postedCommitFileName ){
+                $path = str_replace(getcwd(), '', implode('/', array_merge($developer->rootPath, [$this->baseName . '.sql'])));
+                $this->log("\t" . 'Checking %s.', $path)->log();
+                if( $path == $postedCommitFileName ){
                     $this->log("\t" . 'Database dump file was finally found.')->log();
                     if( FALSE === $developer->database->import(FALSE) ){
                         return FALSE;
@@ -310,7 +308,7 @@ class Developer {
                     return '"' . implode(DIRECTORY_SEPARATOR, array_merge($this->mysqlPath, ['bin', 'mysqldump.exe'])) . '"';
                 }
             default:
-                if( error_reporting() & E_ERROR ){
+                if( error_reporting() ){
                     throw new UnexpectedValueException;
                 }
                 return $entry;
@@ -355,34 +353,40 @@ class Developer {
     }
 
     /**
-     * @param bool $dbExport
      * @return bool
      */
-    public function push( bool $dbExport = FALSE ): bool {
-        /** @var string $command */
+    public function commitLastBases(){
         /** @var string $path */
         $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
-        if( $dbExport ){
-            if( FALSE === $this->database->export(TRUE) ||
-                FALSE === $this->{'cd'}($path) ){
-                return FALSE;
-            }
-            if( count($this->configurations->lastBases) ){
-                $command = 'add "' . implode('" "', $this->configurations->lastBases) . '"';
-                if( FALSE === $this->{'git'}($command) ){
-                    return FALSE;
-                }
-                $command = 'commit -m "' . $this->configurations->baseMsg . '"';
-                if( FALSE === $this->{'git'}($command) ){
-                    return FALSE;
-                }
-            }
-        }
-        if( FALSE === $this->{'cd'}($path) ){
+        if( FALSE === $this->{'cd'} = $path ){
             return FALSE;
         }
+        if( count($this->configurations->lastBases) > 0 ){
+            $command = 'add "' . implode('" "', $this->configurations->lastBases) . '"';
+            if( FALSE === $this->{'git'} = $command ){
+                return FALSE;
+            }
+            $command = 'commit -m "' . $this->configurations->baseMsg . '"';
+            if( FALSE === $this->{'git'} = $command ){
+                return FALSE;
+            }
+            $this->configurations->lastBases = [];
+        }
+        return TRUE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function push(): bool {
+        /** @var string $path */
+        $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
+        if( FALSE === $this->{'cd'} = $path ){
+            return FALSE;
+        }return TRUE;
+        /** @var string $command */
         $command = 'push origin master';
-        return $this->{'git'}($command);
+        return $this->{'git'} = $command;
     }
 
     /**
@@ -391,12 +395,12 @@ class Developer {
     public function pull(): bool {
         /** @var string $path */
         $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
-        if( FALSE === $this->{'cd'}($path) ){
+        if( FALSE === $this->{'cd'} = $path ){
             return FALSE;
         }
         /** @var string $command */
         $command = 'pull > git-pull.txt 2> git-pull.err';
-        return $this->{'git'}($command);
+        return $this->{'git'} = $command;
     }
 }
 
@@ -440,16 +444,17 @@ abstract class Database {
 
     /**
      * @param bool $overwrite
+     * @param string|null $baseName
      * @return bool
      */
-    abstract public function export( bool $overwrite = FALSE ): bool;
+    abstract public function export( bool $overwrite = FALSE, string $baseName = NULL ): bool;
 
     /**
-     * @param bool $export
+     * @param string|null $baseName
      * @param bool $modifyWpUrl
      * @return bool
      */
-    abstract public function import( bool $export = FALSE, bool $modifyWpUrl = FALSE ): bool;
+    abstract public function import( string $baseName = NULL, bool $modifyWpUrl = FALSE ): bool;
 
     /**
      * @return bool
@@ -464,32 +469,37 @@ class MySqlDb extends Database {
 
     /**
      * @param bool $overwrite
+     * @param string|null $baseName
      * @return bool
      */
-    public function export( bool $overwrite = FALSE ): bool {
+    public function export( bool $overwrite = FALSE, string $baseName = NULL ): bool {
+        if( NULL === $baseName ){
+            $baseName = $this->configurations->baseName;
+        }
         /** @var string $path1 */
-        $path1 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
+        $path1 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . '.sql']));
         /** @var string $path2 */
-        $path2 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . ' ' . time() . ' (' . $this->developer->identifier . ').sql']));
+        $path2 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . ' ' . time() . ' (' . $this->developer->identifier . ').sql']));
         /** @var string $command */
         $command = $this->name . ' ';
-        if( $this->pass !== NULL ){
+        if( NULL !== $this->pass ){
             $command .= '--password=' . base64_decode($this->pass) . ' ';
         }
         $command .= '--user=' . $this->user . ' ';
-        $command .= '--single-transaction >' . $path2 . ' ';
-        $command .= '2> ' . implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.err']));
-        if( FALSE === $this->developer->{'mysqldump'}($command) ){
+        $command .= '--single-transaction > "' . $path2 . '" ';
+        $command .= '2> "' . implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . '.err"']));
+        if( FALSE === $this->developer->{'mysqldump'} = $command ){
             return FALSE;
         }
-        if( file_exists($path2) ){
+        if( TRUE === file_exists($path2) ){
             $this->configurations->log('Database file (%s) exists.', $path2)->log();
-            if( $overwrite ){
-                file_put_contents(
-                    $path1,
-                    file_get_contents($path2));
-                if( file_exists($path1) ){
+            if( TRUE === $overwrite ){
+                if( FALSE !== file_put_contents($path1, file_get_contents($path2)) &&
+                    TRUE === file_exists($path1) ){
                     $this->configurations->lastBases[] = $path1;
+                    $this->configurations->log('Database file (%s) exists.', $path1)->log();
+                }else{
+                    $this->configurations->log('Could not overwrite database file.')->log();
                 }
             }
         }
@@ -497,33 +507,31 @@ class MySqlDb extends Database {
     }
 
     /**
-     * @param bool $export
+     * @param string|null $baseName
      * @param bool $modifyWpUrl
      * @return bool
      */
-    public function import( bool $export = FALSE, bool $modifyWpUrl = FALSE ): bool {
-        if( $export ){
-            if( FALSE === $this->export(FALSE) ){
-                return FALSE;
-            }
+    public function import( string $baseName = NULL, bool $modifyWpUrl = FALSE ): bool {
+        if( NULL === $baseName ){
+            $baseName = $this->configurations->baseName;
         }
         /** @var string $path */
-        $path = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$this->configurations->baseName . '.sql']));
+        $path = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . '.sql']));
         if( FALSE === file_exists($path) ){
             $this->configurations->log('Latest database backup file (%s) inexistent.', $path)->log();
             return FALSE;
         }
         /** @var string $command */
         $command = '-u ' . $this->user . ' ';
-        if( $this->pass !== NULL ){
+        if( NULL !== $this->pass ){
             $command .= '-p ' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
         $command .= '< ' . $path;
-        if( FALSE === $this->developer->{'mysql'}($command) ){
+        if( FALSE === $this->developer->{'mysql'} = $command ){
             return FALSE;
         }
-        if( $modifyWpUrl ){
+        if( TRUE === $modifyWpUrl ){
             return $this->modifyWpUrl();
         }
         return TRUE;
@@ -545,6 +553,6 @@ class MySqlDb extends Database {
         }
         $command .= $this->name . ' ';
         $command .= '-e "' . implode('; ', $queries) . ';"';
-        return $this->developer->{'mysql'}($command);
+        return $this->developer->{'mysql'} = $command;
     }
 }
