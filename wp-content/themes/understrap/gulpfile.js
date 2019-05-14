@@ -46,7 +46,7 @@ gulp.task( 'sass', function() {
 // gulp watch
 // Starts watcher. Watcher runs gulp sass task on changes
 gulp.task( 'watch', function() {
-    gulp.watch( paths.sass + '/**/*.scss', ['styles'] );
+    gulp.watch( paths.sass + '/**/*.scss', gulp.series('styles'));
     gulp.watch(
         [
             paths.dev + '/js/**/*.js',
