@@ -524,7 +524,7 @@ class MySqlDb extends Database {
         /** @var string $command */
         $command = '-u ' . $this->user . ' ';
         if( NULL !== $this->pass ){
-            $command .= '-p ' . base64_decode($this->pass) . ' ';
+            $command .= '-p' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
         $command .= '< "' . $path . '"';
@@ -543,13 +543,13 @@ class MySqlDb extends Database {
     public function modifyWpUrl(): bool {
         /** @var string[] $queries */
         $queries = [
-            'UPDATE `' . $this->configurations->wpPrefix . 'options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'siteurl\'',
-            'UPDATE `' . $this->configurations->wpPrefix . 'options` SET `option_value` = \'' . $this->developer->wpUrl . '\' WHERE `option_name` = \'home\'',
+            'UPDATE ' . $this->configurations->wpPrefix . 'options SET option_value=\'' . $this->developer->wpUrl . '\' WHERE option_name=\'siteurl\'',
+            'UPDATE ' . $this->configurations->wpPrefix . 'options SET option_value=\'' . $this->developer->wpUrl . '\' WHERE option_name=\'home\'',
         ];
         /** @var string $command */
         $command = '-u ' . $this->user . ' ';
         if( NULL !== $this->pass ){
-            $command .= '-p ' . base64_decode($this->pass) . ' ';
+            $command .= '-p' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
         $command .= '-e "' . implode('; ', $queries) . ';"';
