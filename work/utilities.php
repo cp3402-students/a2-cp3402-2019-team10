@@ -527,7 +527,7 @@ class MySqlDb extends Database {
             $command .= '-p ' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
-        $command .= '< ' . $path;
+        $command .= '< "' . $path . '"';
         if( FALSE === $this->developer->{'mysql'} = $command ){
             return FALSE;
         }
