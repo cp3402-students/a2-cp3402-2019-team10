@@ -1,0 +1,19 @@
+{
+    "name": "appsero/client",
+    "description": "AppSero Client",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tareq Hasan",
+            "email": "tareq@appsero.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "AppSero\\": "src/"
+        }
+    },
+    "require": {}
+}
