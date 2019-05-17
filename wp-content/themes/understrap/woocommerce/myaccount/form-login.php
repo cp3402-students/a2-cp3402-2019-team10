@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.6.0
+ * @version 3.6.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,9 +23,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
-<div class="u-columns col2-set" id="customer_login">
+<div class="u-columns col2-set row" id="customer_login">
 
-	<div class="u-column1 col-1">
+	<div class="u-column1 col-12 col-md-6">
 
 <?php endif; ?>
 
@@ -51,7 +51,8 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'understrap' ); ?></span>
 				</label>
 				<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Log in', 'understrap' ); ?>"><?php esc_html_e( 'Log in', 'understrap' ); ?></button>
+				<button type="submit" class="btn btn-outline-primary" name="login" value="<?php esc_attr_e( 'Log in', 'understrap' ); ?>"><?php esc_html_e( 'Log in', 'understrap' ); ?></button>
+
 			</p>
 			<p class="woocommerce-LostPassword lost_password">
 				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'understrap' ); ?></a>
@@ -63,9 +64,10 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
+
 	</div>
 
-	<div class="u-column2 col-2">
+	<div class="u-column2 col-md-6">
 
 		<h2><?php esc_html_e( 'Register', 'understrap' ); ?></h2>
 
@@ -94,7 +96,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 					<input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" />
 				</p>
 
-			<?php else : ?>
+				<?php else : ?>
 
 				<p><?php esc_html_e( 'A password will be sent to your email address.', 'understrap' ); ?></p>
 
@@ -104,7 +106,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 			<p class="woocommerce-FormRow form-row">
 				<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<button type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'understrap' ); ?>"><?php esc_html_e( 'Register', 'understrap' ); ?></button>
+				<button type="submit" class="btn btn-outline-primary" name="register" value="<?php esc_attr_e( 'Register', 'understrap' ); ?>"><?php esc_html_e( 'Register', 'understrap' ); ?></button>
 			</p>
 
 			<?php do_action( 'woocommerce_register_form_end' ); ?>

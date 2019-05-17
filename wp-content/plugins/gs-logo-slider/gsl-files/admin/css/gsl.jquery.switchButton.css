@@ -1,0 +1,74 @@
+.switch-button-label {
+    float: left;
+    font-size: 11pt;
+    cursor: pointer;
+    line-height: 24px;
+}
+.gsl_switch_label,
+.gs_select_desc {
+    margin-left: 20px;
+    cursor: auto;
+    font-size: 13px;
+    font-style: italic;
+    vertical-align: sub;
+}
+
+.gs_select_desc,
+.description {
+    margin-left: 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.switch-button-label.off {
+    color: #adadad;
+}
+
+.switch-button-label.on {
+    color: #0088CC;
+}
+
+.switch-button-background {
+    float: left;
+    position: relative;
+    background: #ccc;
+    border: 1px solid #aaa;
+    margin: 1px 10px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.switch-button-button {
+    position: absolute;
+    left: -1px;
+    top : -1px;
+    background: #FAFAFA;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+
+.gs_logo_wrap h2 {
+    margin-left: 10px;
+}
+/*for sidebar*/
+.gswps-admin-sidebar .postbox {
+  text-align: center;
+}
+.gswps-admin-sidebar h3 {
+  font-size: 14px;
+  padding: 8px 12px;
+  margin: 0;
+  line-height: 1.4;
+}
+.gs_logo_wrap input[type=text], .gs_logo_wrap select, .gs_logo_wrap input[type=number] {
+  min-width: 150px;
+  max-width: 150px;
+  text-align: center;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
