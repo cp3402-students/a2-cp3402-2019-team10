@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA;oCACqC;EACpC,KAAK,EAAE,IAAI;;AAMX;oCAAiB;EAChB,KAAK,EAAE,IAAI;AAGZ;uBAAI;EACH,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,IAAI",
+"sources": ["svgs-attachment.scss"],
+"names": [],
+"file": "svgs-attachment.css"
+}

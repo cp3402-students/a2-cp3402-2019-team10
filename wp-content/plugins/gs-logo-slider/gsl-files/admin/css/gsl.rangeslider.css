@@ -1,0 +1,78 @@
+.gs_logo_wrap{
+  margin: 10px 20px 0 2px;
+}
+
+.rangeslider,
+.rangeslider__fill {
+  background: #e6e6e6;
+  display: inline-block;
+  height: 12px;
+  width: 420px;
+  max-width:100%;
+  -webkit-box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.rangeslider {
+  position: relative;
+}
+
+.rangeslider--disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
+
+.rangeslider__fill {
+  background: #0480DA;
+  position: absolute;
+  top: 0;
+}
+
+.rangeslider__handle {
+  background: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: inline-block;
+  width: 18px;
+  height: 22px;
+  position: absolute;
+  top: -6.5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.rangeslider__handle:active {
+  background: #ededed;
+}
+
+input[type="range"]:focus + .rangeslider .rangeslider__handle {
+  -webkit-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+  -moz-box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.9);
+}
+output.gsl_output {
+  width: 45px;
+  display: inline-block;
+  font-size: 15px;
+}
+
+span.range_description {
+  margin-top: 15px;
+  display: block;
+}
+
+.gs_number_type,
+.gs_select_type {
+  min-width: 120px;
+  max-width: 120px;
+  text-align: center;
+}

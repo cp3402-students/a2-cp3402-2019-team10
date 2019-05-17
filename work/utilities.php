@@ -7,8 +7,10 @@
 
 namespace cp3402;
 
-use ErrorException, UnexpectedValueException;
 
+use ErrorException, UnexpectedValueException;
+/*
+***************
 set_error_handler(
     function ( int $type, string $data, string $file = '', int $line = 0 ){
         if( error_reporting() & $type ){
@@ -16,6 +18,8 @@ set_error_handler(
         }
     }
 );
+***********
+*/
 
 /**
  * @package cp3402
