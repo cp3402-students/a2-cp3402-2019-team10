@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2019-05-16T11:39:25+00:00 INFO Regenerating images for attachment ID: 25
 2019-05-16T11:39:26+00:00 INFO Regenerating images for attachment ID: 24
 2019-05-16T11:39:26+00:00 INFO Regenerating images for attachment ID: 22
@@ -5,3 +6,8 @@
 2019-05-16T11:39:26+00:00 INFO Regenerating images for attachment ID: 20
 2019-05-16T11:39:26+00:00 INFO Regenerating images for attachment ID: 5
 2019-05-16T11:39:26+00:00 INFO Completed product image regeneration job.
+=======
+2019-05-16T06:38:13+00:00 INFO Regenerating images for attachment ID: 38
+2019-05-16T06:38:13+00:00 INFO Regenerating images for attachment ID: 5
+2019-05-16T06:38:14+00:00 INFO Completed product image regeneration job.
+>>>>>>> 7bf63174bddefdd2e1cd8df543dbad12af407e31
