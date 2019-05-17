@@ -9,7 +9,11 @@ P {
 
 .bg-primary {
   // variables declared in ./sass/theme/_theme_variables.scss
-  // '!important' tag is needed to overwrite
+  // !important tag is needed when using variables
 
   background-color: $header-bg-colour!important;
+}
+
+.wrapper {
+  padding: 0;
 }
