@@ -31,3 +31,5 @@
 /wp-content/themes/understrap/node_modules
 /wp-content/themes/understrap/package.json
 /wp-content/themes/understrap/package-lock.json
+
+.sass-cache
