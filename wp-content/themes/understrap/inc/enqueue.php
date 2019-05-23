@@ -20,7 +20,7 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		$css_version = $theme_version . '.' . filemtime( get_template_directory() . '/css/theme.min.css' );
 		wp_enqueue_style( 'understrap-styles', get_template_directory_uri() . '/css/theme.min.css', array(), $css_version );
-        wp_enqueue_style('canned-styles', 'https://fonts.googleapis.com/css?family=Nunito|Asar|Stylish' . '/css/theme.min.css');
+        wp_enqueue_style('canned-styles', 'https://fonts.googleapis.com/css?family=Baloo+Bhai|Stylish' . '/css/theme.min.css');
 
 		wp_enqueue_script( 'jquery' );
 
