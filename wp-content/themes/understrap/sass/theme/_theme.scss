@@ -1,10 +1,22 @@
-// This is an empty scss file for your custom styles - Please add your super duper awesome mega design styles here
+
+body {
+  background-image: linear-gradient(#FFFFC1, #EEEEEE);
+}
+
 h1, h2, h3, h4 {
-  font-family: $font__sans, "Montserrat", Arial, sans-serif;
+  font-family: $font__serif, "Helvetica", Arial, serif;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 P {
-  font-family: $font__nunito, 'Helvetica', Arial, serif;
+  font-family: $font__sans, 'Montserrat', Arial, sans-serif;
 }
 
 .bg-primary {
@@ -31,13 +43,11 @@ P {
   text-align: center;
 }
 
-#right-sidebar {
-  padding-top: 2em;
+hr.wp-block-separator {
+  background-image: url(../css/separator.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 12px;
+  border: 0;
+  padding: 2em 0;
 }
-
-.woocommerce {
-    .woocommerce-breadcrumb {
-      margin: 2em 0 1em;
-    }
-}
-
