@@ -4,7 +4,7 @@ h1, h2, h3, h4 {
 }
 
 P {
-  font-family: $font__serif, 'Helvetica', Arial, serif;
+  font-family: $font__nunito, 'Helvetica', Arial, serif;
 }
 
 .bg-primary {
@@ -17,3 +17,21 @@ P {
 .wrapper {
   padding: 0;
 }
+
+.post {
+  padding: 2em 2em 2em 0;
+}
+
+.post-16 {
+  padding: 2em 2em 2em 0;
+}
+
+#wrapper-footer {
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+#right-sidebar {
+  padding-top: 2em;
+}
+
