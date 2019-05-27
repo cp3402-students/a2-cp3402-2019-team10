@@ -20,10 +20,10 @@ P {
 }
 
 .bg-primary {
-  // variables declared in ./sass/theme/_theme_variables.scss
-  // !important tag is needed when using variables
+// variables declared in ./sass/theme/_theme_variables.scss
+// !important tag is needed when using variables
 
-  background-color: $header-bg-colour!important;
+background-color: $header-bg-colour!important;
 }
 
 .wrapper {
@@ -75,5 +75,20 @@ hr.wp-block-separator {
   color: #fff;
   background-color: $header-bg-colour!important;
   border-color: rgba(197, 197, 197, 1);
+}
+
+.woocommerce-loop-product__title {
+  color: black;
+}
+
+.btn-outline-primary {
+  color: black;
+  border-color: black;
+}
+
+.btn-outline-primary:hover {
+  background-color: $header-bg-colour!important;
+  border-color: $color-primary-dark!important;
+  color: white;
 }
 
