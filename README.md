@@ -7,6 +7,14 @@
  - [Yvan Burrie](https://github.com/jc444304)
  - [Anthony Vincin](https://github.com/AnthonyV01)
  - [Stephen Ohl](https://github.com/StephenOhl)
+ 
+## Theme Installation Details
+- Install Wordpress (v5.1.1) according to the installation instructions [here](https://codex.wordpress.org/Installing_WordPress) 
+- Extract the theme archive into {WORDPRESS_FOLDER}/`wp-content/themes/`
+- Log into WordPress as the user created during the installation
+- From the admin sidebar, select `Appearance`, then `Themes`
+- Select the theme called "Canned" and click the `Activate` button 
+- Congratulations, you have installed the theme!
 
 ## Server
  - Domain: [notdotcom.fun](https://notdotcom.fun/)
