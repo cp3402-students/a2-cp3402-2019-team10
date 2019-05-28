@@ -170,3 +170,20 @@ if ( ! function_exists( 'understrap_widgets_init' ) ) {
 
 	}
 } // endif function_exists( 'understrap_widgets_init' ).
+
+class Canned_Profile_Widget extends WP_Widget {
+
+	public function __construct() {
+		$widget_options = array(
+			'classname' => 'example_widget',
+			'description' => 'This is an Example Widget',
+		);
+		parent::__construct( 'profile', __( 'Profile' ), $widget_options );
+	}
+
+	public function widget( $args, $instance ) {
+		parent::widget( $args, $instance );
+	}
+}
+
+register_widget( 'Canned_Profile_Widget' );

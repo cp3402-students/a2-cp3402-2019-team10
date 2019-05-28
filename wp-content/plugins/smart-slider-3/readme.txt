@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: slider, wordpress slider, image slider, layer slider, responsive slider, slideshow, fullwidth slider, post slider, horizontal slider, vertical slider, photo slider, video slider
 Donate link: https://sites.fastspring.com/nextend/product/smartslider3donate
 Requires at least: 4.6
-Tested up to: 5.1.1
-Stable tag: 3.3.18
+Tested up to: 5.2
+Stable tag: 3.3.20
 Requires PHP: 5.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -15,7 +15,7 @@ Responsive slider plugin to create sliders in visual editor easily. Build beauti
 
 [youtube https://www.youtube.com/watch?v=lsq09izc1H4]
 
->[Sample sliders](https://smartslider3.com/tag/free)  |  [Tutorial videos](https://www.youtube.com/watch?v=lsq09izc1H4&list=PLSawiBnEUNfvzcI3pBHs4iKcbtMCQU0dB)  |  [Docs](https://smartslider3.helpscoutdocs.com/)  |  [Support](https://smartslider3.com/contact-us)  |  [PRO features](https://smartslider3.com/pro-features/)
+>[Sample sliders](https://smartslider3.com/tag/free)  |  [Tutorial videos](https://www.youtube.com/watch?v=lsq09izc1H4&list=PLSawiBnEUNfvzcI3pBHs4iKcbtMCQU0dB)  |  [Docs](https://smartslider3.helpscoutdocs.com/)  |  [Support](https://smartslider3.com/help/)  |  [PRO features](https://smartslider3.com/pro-features/)
 
 **Smart Slider 3** is the most powerful and intuitive WordPress plugin to create sliders which was never possible before. Fully responsive, SEO optimized and works with any WordPress theme. Create beautiful sliders and tell stories without any code.
 
@@ -82,7 +82,7 @@ No tech skills needed, just pick a slider template. It works like magic! Choose 
 
 
 #### Support
-Smart Slider 3 is a community-driven project that would not be the same without your feedback. If you have any problem or feature request for this plugin, please feel free to [contact us](https://smartslider3.com/contact-us/)!
+Smart Slider 3 is a community-driven project that would not be the same without your feedback. If you have any problem or feature request for this plugin, please feel free to [contact us](https://smartslider3.com/help/)!
 
 
 #### Smart Slider 3 Pro Features:
@@ -155,14 +155,14 @@ You can add your slider by shortcode or via the widget control panel or PHP shor
 [https://smartslider3.helpscoutdocs.com/](https://smartslider3.helpscoutdocs.com/)
 
 = 3. What should I do when I see blank area where the slider should show or the slider doesn't work? =
-It means that there is a JavaScript error on your site which blocks other scripts(for example Smart Slider's scripts). You can open up the browser debugger window with F12 button and check the console if it shows error or not. If you solve these errors Smart Slider should work fine.
+It means that there is a JavaScript error on your site which blocks other scripts (for example Smart Slider's scripts). You can open up the browser debugger window with F12 button and check the console if it shows error or not. If you solve these errors Smart Slider should work fine.
 
 Usual problem is that you have the latest WordPress version, but your theme loads very old jQuery version (1.7 or older) and the WordPress admin bar throws a JavaScript error. In this case, you have to remove the old jQuery from your theme's functions.php.
 
-If you are unable to solve these problems, feel free to [contact us!](https://smartslider3.com/contact-us/)
+If you are unable to solve these problems, feel free to [contact us!](https://smartslider3.com/help/)
 
 = 4. What should I do when I experience any problem? =
-[Contact us!](https://smartslider3.com/contact-us/)
+[Contact us!](https://smartslider3.com/contact-us/support/)
 
 = 5. Is Smart Slider 3 is totally responsive? =
 Smart Slider 3 is 100% responsive with each items, so it will fit perfectly into your page, regardless of the size of your desktop screen or device.
@@ -195,6 +195,19 @@ Of course! Smart Slider use protocol relative urls which works fine on http:// a
 9. Layer slider with layers styles. Made with FREE version.
 
 == Changelog ==
+
+= 3.3.20 - 23. May 2019. =
+* Feature: WordPress Fusion builder element for Avada theme 
+* Fix: Fix for Beaver builder 
+* Fix: Disable auto loading JS files on frontend when Server side mobile detect is on. 
+* Fix: doPixelSnapping (to overcome Chrome's browser bug.)
+* Fix: Hiding controls' top position space, when control is hidden 
+* Fix: Don't load any codes on Divi when a slider is not published
+* Fix: Bullets didn't worked on mobile and tablet devices 
+* Fix: image layers no longer load if they don't have selected image
+* Other: Translation update Brazil Portugese, Russian, Polish, Italian, French, Finnish.
+* Other: better error message for Free users about MP4 videos
+* Other: Scroll to slider moved to Developer tab. 
 
 = 3.3.18 - 08. April 2019. =
 * Feature:  Image arrows - Base64 encoding on/off to let you avoid lazy loading or other optimization plugins/extensions caused errors 

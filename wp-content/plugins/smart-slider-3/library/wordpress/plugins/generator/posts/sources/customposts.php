@@ -230,7 +230,7 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
         $compare       = array();
         $compare_value = $this->data->get('postmetacompare', '');
         if (!empty($compare_value)) {
-            $compare = array( 'compare' => $compare_value );
+            $compare = array('compare' => $compare_value);
         }
 
         $postMetaKey = $this->data->get('postmetakey', '0');
@@ -252,22 +252,23 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
         if (!empty($metaMore) && $metaMore != 'field_name||compare_method||field_value') {
             $metaMoreValues = explode(PHP_EOL, $metaMore);
             foreach ($metaMoreValues AS $metaMoreValue) {
-                $metaMoreValue = preg_replace('/\s+/', '', $metaMoreValue);
+                $metaMoreValue = trim($metaMoreValue);
                 if ($metaMoreValue != 'field_name||compare_method||field_value') {
                     $metaMoreArray = explode('||', $metaMoreValue);
-                    if (count($metaMoreArray) == 3) {
-                        if (!empty($metaMoreArray[1])) {
-                            $compare = array( 'compare' => $metaMoreArray[1] );
-                        } else {
-                            $compare = array( '' );
-                        }
-                        $metaMoreArray[2] = $this->checkKeywords($metaMoreArray[2]);
+                    if (count($metaMoreArray) >= 2) {
+                        $compare = array('compare' => $metaMoreArray[1]);
+                        
+                        $key_query = array(
+                            'key' => $metaMoreArray[0]
+                        );
 
-                        $getPostMeta['meta_query'][] =
-                            array(
-                                'key'   => $metaMoreArray[0],
-                                'value' => $metaMoreArray[2],
-                            ) + $compare;
+                        if (!empty($metaMoreArray[2])) {
+                            $key_query += array(
+                                'value' => $metaMoreArray[2]
+                            );
+                        }
+
+                        $getPostMeta['meta_query'][] = $key_query + $compare;
                     }
                 }
             }
@@ -307,7 +308,7 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
 
         $getPosts = array_merge($getPosts, $getPostMeta);
 
-        $ids = array_diff($this->getIDs(), array( 0 ));
+        $ids = array_diff($this->getIDs(), array(0));
 
         if (count($ids) > 0) {
             $getPosts += array(
@@ -315,7 +316,7 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
             );
         }
 
-        $exclude_ids = array_diff($this->getIDs('exclude_ids'), array( 0 ));
+        $exclude_ids = array_diff($this->getIDs('exclude_ids'), array(0));
 
         if (count($exclude_ids) > 0) {
             $getPosts += array(
@@ -550,6 +551,7 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
                 }
             }
         }
+
         return $data;
     }
 
@@ -576,6 +578,7 @@ class N2GeneratorPostsCustomPosts extends N2GeneratorAbstract {
                 $from = str_replace($key, trim($value), $from);
             }
         }
+
         return $from;
     }
 

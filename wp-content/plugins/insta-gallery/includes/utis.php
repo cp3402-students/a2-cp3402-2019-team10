@@ -10,35 +10,42 @@ global $qligg, $qligg_api;
 function qligg_save_options() {
   global $qligg;
   $option = $qligg;
-  $option = array_map(function ($value) {
-    return base64_encode($value);
-  }, $option);
-  update_option('insta_gallery_iac', $option, false);
-}
-
-// clear old cache
-function qligg_clear_transients($tk = false) {
-  if ($tk) {
-    delete_transient($tk);
-  } else {
-    delete_transient('instagallery_user_profile_info');
-    delete_transient('instagallery_user_feed');
-  }
+  //$option = array_map(function ($value) {
+  //  return base64_encode($value);
+  //}, $option);
+  update_option('insta_gallery_token', $option, false);
+  delete_option('insta_gallery_iac');
+  delete_transient('insta_gallery_user_profile');
 }
 
 // Return profile info
 // -----------------------------------------------------------------------------
-function qligg_get_user_profile_info() {
+function qligg_get_user_profile($id = null) {
 
   global $qligg, $qligg_api;
 
-  if (!$profile_info = get_transient('instagallery_user_profile_info')) {
-    if ($profile_info = $qligg_api->get_user_profile_info($qligg['access_token'])) {
-      set_transient('instagallery_user_profile_info', $profile_info, HOUR_IN_SECONDS);
+  $profile_info = array();
+
+  $defaults = array(
+      'username' => 'nousername',
+      'full_name' => __('Something went wrong, remove this token', 'insta-gallery'),
+      'profile_picture' => 'http://2.gravatar.com/avatar/b642b4217b34b1e8d3bd915fc65c4452?s=96&d=mm&r=g',
+  );
+
+  $tk = "insta_gallery_user_profile"; // transient key
+
+  if (!QLIGG_PRODUCTION || false === ($profile_info = get_transient($tk))) {
+
+    if (empty($id) || !isset($qligg[$id])) {
+      return $defaults;
+    }
+
+    if ($profile_info[$id] = $qligg_api->get_user_profile($qligg[$id])) {
+      set_transient($tk, $profile_info, 2 * HOUR_IN_SECONDS);
     }
   }
 
-  return $profile_info;
+  return wp_parse_args($profile_info[$id], $defaults);
 }
 
 // Get user feed
@@ -47,36 +54,21 @@ function qligg_get_user_items($item = array()) {
 
   global $qligg, $qligg_api;
 
-  $instagram_items = '';
+  if (!isset($item['insta_username'])) {
+    return;
+  }
+
+  if (empty($qligg[$item['insta_username']])) {
+    return;
+  }
 
   $limit = isset($item['insta_user-limit']) ? absint($item['insta_user-limit']) : 12;
 
-  if (empty($qligg['access_token'])) {
-    return '';
-  }
-  
-  $tk = 'instagallery_user_feed'; // transient key
-  
-  $tkart = $tk . '_artimeout'; // transient key admin request timeout
-  
-  if (!QLIGG_PRODUCTION || (current_user_can('administrator') && (false === get_transient($tkart)))) {
-    
-    $instagram_items = $qligg_api->get_user_media($qligg['access_token'], $limit);
-    
-    if (!empty($instagram_items)) {
+  $tk = 'insta_gallery_user_items'; // transient key
+  // Get any existing copy of our transient data
+  if (!QLIGG_PRODUCTION || false === ($instagram_items = get_transient($tk))) {
+    if ($instagram_items = $qligg_api->get_user_items($qligg[$item['insta_username']], $limit)) {
       set_transient($tk, $instagram_items, 2 * HOUR_IN_SECONDS);
-      set_transient($tkart, true, 5 * MINUTE_IN_SECONDS);
-    }
-    
-  } else {
-    // Get any existing copy of our transient data
-    if (false === ($instagram_items = get_transient($tk))) {
-      
-      $instagram_items = $qligg_api->get_user_media($qligg['access_token'], $limit);
-      
-      if (!empty($instagram_items)) {
-        set_transient($tk, $instagram_items, 2 * HOUR_IN_SECONDS);
-      }
     }
   }
 
@@ -85,34 +77,19 @@ function qligg_get_user_items($item = array()) {
 
 // Get tag items
 // -----------------------------------------------------------------------------
-function qligg_get_tag_items($item) {
-  global $qligg_api;
+function qligg_get_tag_items($item = array()) {
 
-  $instagram_items = '';
+  global $qligg, $qligg_api;
 
   if (empty($item['insta_tag'])) {
-    return '';
+    return;
   }
 
-  $tk = 'instagallery_tag_' . $item['insta_tag']; // transient key
-
-  $tkart = $tk . '_artimeout'; // transient key admin request timeout
-
-  if (!QLIGG_PRODUCTION || (current_user_can('administrator') && (false === get_transient($tkart)))) {
-
-    $instagram_items = $qligg_api->get_tag_items($item['insta_tag']);
-
-    if (!empty($instagram_items)) {
+  $tk = "insta_gallery_tag_items_{$item['insta_tag']}"; // transient key
+  // Get any existing copy of our transient data
+  if (!QLIGG_PRODUCTION || false === ($instagram_items = get_transient($tk))) {
+    if (!empty($instagram_items = $qligg_api->get_tag_items($item['insta_tag']))) {
       set_transient($tk, $instagram_items, 2 * HOUR_IN_SECONDS);
-      set_transient($tkart, true, 5 * MINUTE_IN_SECONDS);
-    }
-  } else {
-    // Get any existing copy of our transient data
-    if (false === ($instagram_items = get_transient($tk))) {
-      $instagram_items = $qligg_api->get_tag_items($item['insta_tag']);
-      if (!empty($instagram_items)) {
-        set_transient($tk, $instagram_items, 2 * HOUR_IN_SECONDS);
-      }
     }
   }
 

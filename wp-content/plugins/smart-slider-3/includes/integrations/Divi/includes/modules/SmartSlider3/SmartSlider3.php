@@ -39,10 +39,12 @@ class Nextend_SmartSlider3 extends ET_Builder_Module {
 
     public function get_fields() {
 
-        add_action('wp_footer', array(
-            $this,
-            'add_styles_scripts'
-        ));
+        if (et_core_is_fb_enabled()) {
+            add_action('wp_footer', array(
+                $this,
+                'add_styles_scripts'
+            ));
+        }
 
         N2base::getApplication('smartslider')
               ->getApplicationType('backend');

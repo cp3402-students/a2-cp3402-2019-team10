@@ -136,8 +136,15 @@ class N2SmartsliderSlidersModel extends N2Model {
 
         $generalTab  = new N2TabGroupped($sliderSettings, 'general', n2_('General'));
         $generalTab2 = new N2Tab($generalTab, 'slider', false);
-        new N2ElementText($generalTab2, 'title', n2_('Name'), n2_('Slider'), array(
+
+        $nameGroup = new N2ElementGroup($generalTab2, 'namegroup', n2_('Slider name'));
+
+        new N2ElementText($nameGroup, 'title', n2_('Name'), n2_('Slider'), array(
             'style' => 'width:400px;'
+        ));
+
+        new N2ElementText($nameGroup, 'aria-label', n2_('ARIA Label'), n2_('Slider'), array(
+            'style' => 'width:200px;'
         ));
 
         $aliasGroup = new N2ElementGroup($generalTab2, 'aliasgroup', n2_('Alias'), array(
@@ -177,10 +184,6 @@ class N2SmartsliderSlidersModel extends N2Model {
 
         new N2ElementOnOff($controls, 'controlsScroll', n2_('Mouse wheel'), 0);
         new N2ElementOnOff($controls, 'controlsKeyboard', n2_('Keyboard'), 1);
-
-        $focus = new N2ElementGroup($generalTab2, 'slider-focus', n2_('Scroll to slider'));
-        new N2ElementOnOff($focus, 'responsiveFocusUser', n2_('User interaction'), 1);
-        new N2ElementOnOff($focus, 'responsiveFocusAutoplay', n2_('Autoplay'), 0);
 
         new N2ElementImage($generalTab2, 'thumbnail', n2_('Thumbnail'), '');
         new N2ElementRadio($generalTab2, 'align', n2_('Align'), 'normal', array(
@@ -461,6 +464,8 @@ class N2SmartsliderSlidersModel extends N2Model {
             ),
             'unit'   => 'px'
         ));
+
+        new N2ElementOnOff($developerOptions, 'responsiveFocusUser', n2_('Scroll to slider on user interaction'), 1);
 
         new N2ElementTextarea($developerOptions, 'custom-css-codes', n2_('CSS'), '', array(
             'fieldStyle' => 'width:600px;height:300px;'
