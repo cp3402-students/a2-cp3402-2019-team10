@@ -20,17 +20,6 @@ $container = get_theme_mod( 'understrap_container_type' );
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
-    <script>
-        $(document).ready(function() {
-            $(window).scroll(function () {
-                var height = $(window).scrollTop();
-                if (height > 300) {
-                    alert("fhihgs");
-                    //$("html, body").animate({scrollTop: 0}, 500);
-                }
-            });
-        };
-    </script>
 </head>
 
 <body <?php body_class(); ?>>
