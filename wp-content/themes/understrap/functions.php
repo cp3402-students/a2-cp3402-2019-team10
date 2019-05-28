@@ -25,6 +25,7 @@ $understrap_includes = array(
 	'/woocommerce.php',                     // Load WooCommerce functions.
 	'/editor.php',                          // Load Editor functions.
 	'/deprecated.php',                      // Load deprecated functions.
+	'/plugin-activator.php',
 );
 
 foreach ( $understrap_includes as $file ) {
