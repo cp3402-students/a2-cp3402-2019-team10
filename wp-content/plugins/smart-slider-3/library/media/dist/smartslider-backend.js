@@ -2763,7 +2763,7 @@ N2D('SlidesManager', function ($, undefined) {
         var images = [];
         for (var i = 0; i < _images.length; i++) {
             if (_images[i].image.match(/\.(mp4)/i)) {
-                N2Classes.Notification.error('Video is not supported!');
+                N2Classes.Notification.error('MP4 videos are not supported in the Free version!');
             
             } else {
                 images.push(_images[i]);

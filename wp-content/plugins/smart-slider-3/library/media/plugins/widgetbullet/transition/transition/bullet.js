@@ -66,7 +66,7 @@ N2D('SmartSliderWidgetBulletTransition', function ($, undefined) {
     SmartSliderWidgetBulletTransition.prototype.onFirstSlideSet = function (slide) {
 
         this.onSlideCountChanged();
-        this.$dots.eq(slide.index).addClass('n2-active');
+        this.$dots.eq(slide.index).addClass('n2-active').attr('aria-current', 'true');
     };
 
     SmartSliderWidgetBulletTransition.prototype.onDotClick = function (i, e) {
@@ -75,8 +75,8 @@ N2D('SmartSliderWidgetBulletTransition', function ($, undefined) {
     };
 
     SmartSliderWidgetBulletTransition.prototype.onSlideSwitch = function (e, targetSlideIndex) {
-        this.$dots.filter('.n2-active').removeClass('n2-active');
-        this.$dots.eq(targetSlideIndex).addClass('n2-active');
+        this.$dots.filter('.n2-active').removeClass('n2-active').removeAttr('aria-current');
+        this.$dots.eq(targetSlideIndex).addClass('n2-active').attr('aria-current', 'true');
     };
 
     SmartSliderWidgetBulletTransition.prototype.isVisible = function () {
@@ -167,9 +167,18 @@ N2D('SmartSliderWidgetBulletTransition', function ($, undefined) {
 
         for (var i = 0; i < this.slider.slides.length; i++) {
             var slide = this.slider.slides[i],
-                $dot = $('<div class="n2-ow ' + this.parameters.dotClasses + '" tabindex="0"></div>')
-                    .on(this.event, $.proxy(this.onDotClick, this, i))
+                $dot = $('<div class="n2-ow n2-bullet ' + this.parameters.dotClasses + '" tabindex="0"></div>')
+                    .attr('role', 'button')
+                    .attr('aria-label', slide.getTitle())
                     .appendTo(this.bar);
+
+            /**
+             * @see https://bugs.webkit.org/show_bug.cgi?id=197190
+             */
+            $dot.wrap($('<div class="n2-ow"></div>')
+                .on(this.event, $.proxy(this.onDotClick, this, i)))
+                .on('n2Activate', $.proxy(this.onDotClick, this, i));
+
             switch (this.parameters.mode) {
                 case 'numeric':
                     $dot.html(i + 1);
@@ -191,7 +200,7 @@ N2D('SmartSliderWidgetBulletTransition', function ($, undefined) {
             }
         }
 
-        this.$dots = this.bar.find('>*');
+        this.$dots = this.bar.find('>div>*');
     };
 
     return SmartSliderWidgetBulletTransition;

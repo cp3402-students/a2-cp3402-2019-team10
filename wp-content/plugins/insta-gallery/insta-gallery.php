@@ -7,10 +7,10 @@
  * Author URI: https://www.quadlayers.com
  * Requires at least: 3.8
  * Requires PHP: 5.3
- * Tested up to: 5.1
+ * Tested up to: 5.2
  * Text Domain: insta-gallery
  * Domain Path: /languages/
- * Version: 2.2.3
+ * Version: 2.3.1
  */
 
 if (!defined('ABSPATH'))
@@ -20,7 +20,7 @@ if (!defined('QLIGG_PLUGIN_NAME')) {
   define('QLIGG_PLUGIN_NAME', 'Instagram Gallery');
 }
 if (!defined('QLIGG_PLUGIN_VERSION')) {
-  define('QLIGG_PLUGIN_VERSION', '2.2.3');
+  define('QLIGG_PLUGIN_VERSION', '2.3.1');
 }
 if (!defined('QLIGG_PLUGIN_FILE')) {
   define('QLIGG_PLUGIN_FILE', __FILE__);
@@ -50,7 +50,7 @@ if (!defined('QLIGG_GROUP_URL')) {
   define('QLIGG_GROUP_URL', 'https://www.facebook.com/groups/quadlayers');
 }
 if (!defined('QLIGG_PRODUCTION')) {
-  define('QLIGG_PRODUCTION', true);
+  define('QLIGG_PRODUCTION', false);
 }
 
 if (!class_exists('QLIGG')) {

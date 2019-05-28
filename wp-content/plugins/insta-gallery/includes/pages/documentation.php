@@ -123,7 +123,7 @@ if (!defined('ABSPATH'))
       <tr>
         <th>Valid redirect URIs</th>
         <td>have to be <input type="url" onclick="select();document.execCommand('copy');alert('copied');" title="click to copy"
-                              value="<?php echo admin_url('admin.php?page=qligg&igigresponse=1'); ?>" class="ig-doc-red-url" readonly /><br /> <strong
+                              value="<?php echo admin_url('admin.php?page=qligg_token&igigresponse=1'); ?>" class="ig-doc-red-url" readonly /><br /> <strong
                               style="color: #e93b59; font-size: 15px; line-height: normal; font-style: italic;">(note that you should set the redirect link exactly the same
             displayed here.)</strong></td>
       </tr>

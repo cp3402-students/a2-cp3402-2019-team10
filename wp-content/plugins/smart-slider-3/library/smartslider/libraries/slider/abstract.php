@@ -383,7 +383,11 @@ abstract class N2SmartSliderAbstract extends N2SmartSliderRenderableAbstract {
             N2JS::addInline($aliasJS);
         }
 
-        $slider = N2Html::tag("div", array('class' => 'n2-section-smartslider ' . $this->params->get('classes', '')), $slider);
+        $slider = N2Html::tag("div", array(
+            'class'      => 'n2-section-smartslider ' . $this->params->get('classes', ''),
+            'role'       => 'region',
+            'aria-label' => $this->params->get('aria-label', 'Slider')
+        ), $slider);
 
         if (intval($this->params->get('clear-both', 0))) {
             $slider = '<div class="n2-clear"></div>' . $slider;

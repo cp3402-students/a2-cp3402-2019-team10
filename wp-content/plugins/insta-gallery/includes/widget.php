@@ -49,7 +49,7 @@ class QLIGG_Widget extends WP_Widget {
             foreach ($InstaGalleryItems as $k => $IGItem) {
               $label = '';
               if ($IGItem['ig_select_from'] == 'username') {
-                $label = __('Username', 'insta-gallery') . ' / ' . $IGItem['insta_user'];
+                $label = __('Username', 'insta-gallery') . ' / ' . $IGItem['insta_username'];
               } else {
                 $label = __('Tagname', 'insta-gallery') . ' / ' . $IGItem['insta_tag'];
               }

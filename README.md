@@ -8,10 +8,13 @@
  - [Anthony Vincin](https://github.com/AnthonyV01)
  - [Stephen Ohl](https://github.com/StephenOhl)
  
+<<<<<<< HEAD
+=======
 ## Theme Installation Details
  - Install Wordpress (v5.1.1) according to the installation instructions [here] (https://codex.wordpress.org/Installing_WordPress)
  - Extract the theme archive
 
+>>>>>>> refs/remotes/origin/master
 ## Server
  - Domain: [notdotcom.fun](https://notdotcom.fun/)
  - Address: [139.162.34.109](139.162.34.109)
@@ -42,15 +45,24 @@
    - Database name: `prod`
  - [Staging Site](https://notdotcom.fun/staging/)
    - Database name: `staging`
- - Plugins:
-   - [WooCommerce](https://woocommerce.com/)
-   - [WP Forms](https://wpforms.com/)
-   - [Smart Slider](https://smartslider3.com/)
-   - [Instagram Gallery](https://wordpress.org/plugins/insta-gallery/)
 
-## Developer setup
-The following instructions are based on using basic Unix commandline tools.  If you are using a graphical interface to git, you will need to adjust these instructions accordingly. 
- - Initially, install WordPress on your development environment.  
+## Theme Installation
+ - Install Wordpress (v5.1.1) according to the installation instructions [here](https://codex.wordpress.org/Installing_WordPress) 
+ - Extract the theme archive into {WORDPRESS_FOLDER}/`wp-content/themes/`
+ - Log into WordPress as the user created during the installation
+ - From the admin sidebar, select `Appearance`, then `Themes`
+ - Select the theme called "Canned" and click the `Activate` button
+ - Ensure all required plugins are installed (as alerted in plugin panel).
+ - Congratulations, you have installed the theme!
+
+## Development Continuation
+ - Edit `work/configurations.ini` with correct credentials/details.
+ - Go to `work/index.php`.
+ - Go to *Deploy* and then select your local developer.
+ - Finally, use the tools at your disposal: Git push/pull, DB import/export, etc.
+ - Upon pushing to Github, if the webhook is active, the server should handle the request.
+
+## Development on Server
  - Issue the following commands to clone the github repository into your development environment's wordpress installation 
    - Change into the wp-content/themes directory
      - `cd `<WordPress-installation-directory>`/wp-content/`
@@ -75,7 +87,7 @@ The following instructions are based on using basic Unix commandline tools.  If 
      - `git commit -m "Useful commit message"`
      - `git push` 
 
-## Deployment
+## Deployment on Server
  - Log in to `your_username@cp3402.notdotcom.fun` via SSH.
  - Run the command `cp3402deploy` which performs the following:
    - Changes to the staging site's `wp-content/themes/` directory.

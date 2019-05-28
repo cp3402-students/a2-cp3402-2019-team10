@@ -19,17 +19,24 @@ class N2ElementWordPressTaxonomies extends N2ElementList {
 
         $taxonomyNames = get_object_taxonomies($this->postType);
 
+        $skip = array(
+            'category',
+            'post_tag'
+        );
+
         foreach ($taxonomyNames as $taxonomyName) {
-            $terms = get_terms(array(
-                'taxonomy' => $taxonomyName
-            ));
-            if (count($terms)) {
-                $taxonomy = get_taxonomy($taxonomyName);
-                $options  = array();
-                foreach ($terms AS $term) {
-                    $options[$taxonomy->name . $this->postSeparator . $term->term_id] = '- ' . $term->name;
+            if (($this->postType == 'post' && !in_array($taxonomyName, $skip)) || $this->postType != 'post') {
+                $terms = get_terms(array(
+                    'taxonomy' => $taxonomyName
+                ));
+                if (count($terms)) {
+                    $taxonomy = get_taxonomy($taxonomyName);
+                    $options  = array();
+                    foreach ($terms AS $term) {
+                        $options[$taxonomy->name . $this->postSeparator . $term->term_id] = '- ' . $term->name;
+                    }
+                    $this->optgroup[$taxonomy->label] = $options;
                 }
-                $this->optgroup[$taxonomy->label] = $options;
             }
         }
     }

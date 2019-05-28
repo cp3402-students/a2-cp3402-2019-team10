@@ -59,7 +59,7 @@ class N2SmartSliderFeatureResponsive {
 
     public $mobileLandscapeScreenWidth = 740;
 
-    public $focusUser = 1, $focusAutoplay = 0;
+    public $focusUser = 1;
 
     public $orientationMode = 'width_and_height';
 
@@ -73,7 +73,6 @@ class N2SmartSliderFeatureResponsive {
 
 
         $this->focusUser     = intval($slider->params->get('responsiveFocusUser', 1));
-        $this->focusAutoplay = intval($slider->params->get('responsiveFocusAutoplay', 0));
 
         $this->type = $slider->params->get('responsive-mode', 'auto');
 
@@ -424,7 +423,6 @@ class N2SmartSliderFeatureResponsive {
             'decreaseSliderHeight'             => $this->responsiveDecreaseSliderHeight,
 
             'focusUser'     => $this->focusUser,
-            'focusAutoplay' => $this->focusAutoplay,
 
             'deviceModes'            => $this->modes,
             'normalizedDeviceModes'  => $normalizedDeviceModes,

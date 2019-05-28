@@ -1,331 +1,335 @@
-/**
- * Instagram Gallery script for insta-gallery wp plugin
- * 
- */
+(function ($) {
+//https://w3bits.com/flexbox-masonry/
+  var swiper_index = 0, $swipers = {};
 
-(function($) {
+  // Carousel
+  // ---------------------------------------------------------------------------
+  function add_insta_gallery_carousel($item) {
 
-	var swiperCounter = 0, IGSwipers = {};
-	// load insta gallery content
-	function load_ig_gallery() {
-		$('.ig-block').each(
-				function() {
-					var $e = $(this);
-					if ($e.hasClass('ig-block-loaded')) {
-						return true;
-					} else {
-						$e.addClass('ig-block-loaded');
-					}
-					var $spinner = $e.find('.ig-spinner');
-					var insgalid = parseInt($e.data('insgalid'));
-					if (!$spinner.length || isNaN(insgalid)) {
-						return;
-					}
+    var $wrap = $('.insta-gallery-items', $item),
+            options = $wrap.data('igfs');
 
-					jQuery.ajax(
-							{
-								url : insgalajax.ajax_url,
-								type : 'post',
-								dataType : 'JSON',
-								data : {
-									action : 'load_ig_item',
-									insgalid : insgalid
-								},
-								beforeSend : function() {
-									$spinner.show();
-								},
-								success : function(response) {
-									if ((typeof response == 'undefined')
-											|| (response == null)
-											|| (response == 0))
-										return;
-									if ((typeof response === 'object')
-											&& response.success) {
-										if (response.data) {
-											$e.append(response.data);
-											handle_ig_gallery($e);
-										}
-									}
-								}
-							}).fail(function(jqXHR, textStatus) {
-						console.log(textStatus);
-					}).always(
-							function() {
-								$spinner.hide();
-								if ($e.find('.instagallery-actions').length) {
-									$spinner.prependTo($e
-											.find('.instagallery-actions'));
-								}
-							});
-				});
-	}
+    if ($wrap.data('type') == 'carousel') {
+      swiper_index++;
 
-	// initializing the gallery
-	function handle_ig_gallery($c) {
-		if (!$c.find('[data-igfs]').length) {
-			return;
-		}
-		var $igc = $c.find('[data-igfs]');
-		var igfs = $igc.data('igfs');
-		if (igfs.display_type == 'gallery') {
-			init_ig_gallery($igc, igfs)
-		} else if (igfs.display_type == 'carousel') {
-			init_ig_carousel($igc, igfs)
-		}
-	}
+      // resize images to square
+      /*var instacarouselImages = $wrap.find('img.insta-gallery-image');
+       if (instacarouselImages.length) {
+       var images = instacarouselImages.length, loaded = 0, minheight = 0;
+       instacarouselImages.load(function () {
+       loaded++;
+       if (minheight == 0)
+       minheight = $(this).height();
+       // if(minheight > $(this).height())minheight =
+       // $(this).height();
+       if (($(this).width() == $(this).height()))
+       minheight = $(this).height();
+       if (loaded >= images) {
+       $wrap.find('img.insta-gallery-image').each(function () {
+       var i = $(this);
+       var th = i.height();
+       if (minheight < th) {
+       var m = (th - minheight) / 2;
+       $(this).css('margin-top', '-' + m + 'px');
+       $(this).css('margin-bottom', '-' + m + 'px');
+       }
+       });
+       $swipers[swiper_index].update();
+       }
+       });
+       }*/
 
-	// initializing the gallery
-	function init_ig_gallery($igc, igfs) {
+      $swipers[swiper_index] = new Swiper($wrap, {
+        //direction: 'vertical',
+        loop: true,
+        autoHeight: true,
+        observer: true,
+        observeParents: true,
+        spaceBetween: parseInt(options.spacing),
+        slidesPerView: parseInt(options.slides),
+        autoplay: {
+          delay: parseInt(options.autoplay_interval),
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          420: {
+            slidesPerView: 1,
+            spaceBetween: 2,
+          },
+          767: {
+            slidesPerView: Math.min(2, options.slides)
+          },
+          1023: {
+            slidesPerView: Math.min(3, options.slides)
+          }
+        }
+      });
+    }
+  }
 
-		// resize images to square
-		var instagalleryImages = $igc.find('.ig-item img.instagallery-image');
-		if (instagalleryImages.length) {
-			var totalImages = instagalleryImages.length, imagesLoaded = 0, minHeight = 0;
-			instagalleryImages.load(function() {
-				imagesLoaded++;
-				if (minHeight == 0)
-					minHeight = jQuery(this).height();
-				// if(minHeight > jQuery(this).height())minHeight =
-				// jQuery(this).height();
-				if ((jQuery(this).width() == jQuery(this).height()))
-					minHeight = jQuery(this).height();
-				if (imagesLoaded >= totalImages) {
-					$igc.find('.ig-item img.instagallery-image').each(
-							function() {
-								var i = jQuery(this);
-								var th = i.height();
-								if (minHeight < th) {
-									var m = (th - minHeight) / 2;
-									jQuery(this).css('margin-top',
-											'-' + m + 'px');
-									jQuery(this).css('margin-bottom',
-											'-' + m + 'px');
-								}
-							});
-				}
-			});
-		}		
+  // Masonry Vertical
+  // ---------------------------------------------------------------------------
+  function add_insta_gallery_masonry($item) {
 
-		if (!igfs.popup) {
-			return;
-		}
+    var $wrap = $('.insta-gallery-items', $item),
+            options = $wrap.data('igfs');
 
-		$igc
-				.find('.ig-item a')
-				.magnificPopup(
-						{
-							type : 'image',
-							mainClass : 'mfp-with-zoom',
-							zoom : {
-								enabled : true,
-								duration : 300,
-								easing : 'ease-in-out',
-								opener : function(openerElement) {
-									return openerElement.is('img') ? openerElement
-											: openerElement.find('img');
-								}
-							},
-							gallery : {
-								enabled : true
-							},
-							image : {
-								titleSrc : function(item) {
-									return item.el.attr('data-title')
-											+ '<small><a href="'
-											+ item.el.attr('data-iplink')
-											+ '" target="blank" title="view on Instagram"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path style=" " d="M 5 3 C 3.898438 3 3 3.898438 3 5 L 3 19 C 3 20.101563 3.898438 21 5 21 L 19 21 C 20.101563 21 21 20.101563 21 19 L 21 13 L 19 11 L 19 19 L 5 19 L 5 5 L 13 5 L 11 3 Z M 14 3 L 16.65625 5.65625 L 9.15625 13.15625 L 10.84375 14.84375 L 18.34375 7.34375 L 21 10 L 21 3 Z "/>Link</svg></a></small>';
-								}
-							}
-						});
-	}
+    if ($wrap.data('type') == 'masonry') {
 
-	// initializing the carousel
-	function init_ig_carousel($igc, igfs) {
-		swiperCounter++;
-		
-		// resize images to square
-		var instacarouselImages = $igc.find('img.instacarousel-image');
-		if (instacarouselImages.length) {
-			var totalImages = instacarouselImages.length, imagesLoaded = 0, minHeight = 0;
-			instacarouselImages.load(function() {
-				imagesLoaded++;
-				if (minHeight == 0)
-					minHeight = jQuery(this).height();
-				// if(minHeight > jQuery(this).height())minHeight =
-				// jQuery(this).height();
-				if ((jQuery(this).width() == jQuery(this).height()))
-					minHeight = jQuery(this).height();
-				if (imagesLoaded >= totalImages) {
-					$igc.find('img.instacarousel-image').each(function() {
-						var i = jQuery(this);
-						var th = i.height();
-						if (minHeight < th) {
-							var m = (th - minHeight) / 2;
-							jQuery(this).css('margin-top', '-' + m + 'px');
-							jQuery(this).css('margin-bottom', '-' + m + 'px');
-						}
-					});
-					IGSwipers[swiperCounter].update();
-				}
-			});
-		}
+      var breakpoints = {
+        420: {
+          slidesPerView: 1,
+          spaceBetween: 2,
+        },
+        767: {
+          slidesPerView: Math.min(2, options.slides)
+        },
+        1023: {
+          slidesPerView: Math.min(3, options.slides)
+        }
+      };
 
-		var soptions = {
-			loop : true,
-			autoHeight : true,
-			observer : true,
-			observeParents : true,
-		};
-		if (igfs.autoplay) {
-			var interval = igfs.autoplay_interval ? parseInt(igfs.autoplay_interval) : 3000;
-			soptions.autoplay = {
-				delay : interval
-			};
-		}
-		/*
-		if (igfs.dots) {
-			soptions.pagination = {
-				el : '.swiper-pagination',
-				type : 'bullets',
-				clickable : true,
-			};
-		}
-		*/
-		if (igfs.navarrows) {
-			soptions.navigation = {
-				nextEl : '.swiper-button-next',
-				prevEl : '.swiper-button-prev',
-			};
-		}
-		if (igfs.spacing) {
-			soptions.spaceBetween = 20;
-		}
-		soptions.slidesPerView = igfs.slidespv;
-		soptions.breakpoints = {};
+      var g = $wrap,
+              gc = document.querySelectorAll('.ig-item'),
+              $images = $wrap.find('img.insta-gallery-image'),
+              gcLength = gc.length, // Total number of cells in the masonry
+              gHeight = 0, // Initial height of our masonry
+              gridGutter = 0,
+              dGridCol = options.columns,
+              tGridCol = 2,
+              mGridCol = 1,
+              //dWidth = Math.round($wrap.width() / $wrap.find('.ig-item')),
+              i; // Loop counter
 
-		if (igfs.slidespv > 3) {
-			soptions.breakpoints[1023] = {
-				slidesPerView : 3,
-				spaceBetween : 20
-			};
-		}
-		if (igfs.slidespv > 2) {
-			soptions.breakpoints[767] = {
-				slidesPerView : 2,
-				spaceBetween : 15
-			};
-		}
-		soptions.breakpoints[420] = {
-			slidesPerView : 1
-		};
+      if ($images.length) {
 
-		IGSwipers[swiperCounter] = new Swiper($igc, soptions);
+        var images = $images.length, loaded = 0;
 
-		if (igfs.popup) {
-			$igc
-					.find('.swiper-slide>a')
-					.magnificPopup(
-							{
-								type : 'image',
-								mainClass : 'mfp-with-zoom',
-								zoom : {
-									enabled : true,
-									duration : 300,
-									easing : 'ease-in-out',
-									opener : function(openerElement) {
-										return openerElement.is('img') ? openerElement
-												: openerElement.find('img');
-									}
-								},
-								gallery : {
-									enabled : true
-								},
-								image : {
-									titleSrc : function(item) {
-										return item.el.attr('data-title')
-												+ '<small><a href="'
-												+ item.el.attr('data-iplink')
-												+ '" target="blank" title="view on Instagram"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path style=" " d="M 5 3 C 3.898438 3 3 3.898438 3 5 L 3 19 C 3 20.101563 3.898438 21 5 21 L 19 21 C 20.101563 21 21 20.101563 21 19 L 21 13 L 19 11 L 19 19 L 5 19 L 5 5 L 13 5 L 11 3 Z M 14 3 L 16.65625 5.65625 L 9.15625 13.15625 L 10.84375 14.84375 L 18.34375 7.34375 L 21 10 L 21 3 Z "/>Link</svg></a></small>';
-									}
-								}
-							});
-		}
+        $images.load(function (e) {
+          loaded++;
 
+          if (loaded >= images) {
 
-	}
+            setTimeout(function () {
+              // Calculate the net height of all the cells in the masonry
+              for (i = 0; i < gcLength; ++i) {
+                gHeight += gc[i].offsetHeight + parseInt(gridGutter);
+              }
 
-	// lazy images // draft
-	function ig_lazy_load($igc,igfs) {
-		var lazyImages = [].slice.call($igc.find('img.ig-lazy'));
-		var active = false;
+              //$wrap.css({'height': gHeight / dWidth + gHeight / (gcLength + 1) + "px", 'display': 'flex'});
 
-		var lazyLoadImages = function() {
-			if (active === false) {
-				active = true;
+              if (window.screen.width >= 1024) {
+                $wrap.css({'height': gHeight / dGridCol + gHeight / (gcLength + 1) + "px", 'display': 'flex'});
+              } else if (window.screen.width < 1024 && window.screen.width >= 768) {
+                $wrap.css({'height': gHeight / tGridCol + gHeight / (gcLength + 1) + "px", 'display': 'flex'});
+              } else {
+                $wrap.css({'height': gHeight / mGridCol + gHeight / (gcLength + 1) + "px", 'display': 'flex'});
+              }
 
-				setTimeout(
-						function() {
-							lazyImages
-									.forEach(function(lazyImage) {
-										if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage
-												.getBoundingClientRect().bottom >= 0)
-												&& getComputedStyle(lazyImage).display !== "none") {
-											lazyImage.src = lazyImage.dataset.src;
-											lazyImage.classList.remove("lazy");
+            }, 200);
+          }
+        });
+      }
+      //});
+    }
 
-											lazyImages = lazyImages
-													.filter(function(image) {
-														return image !== lazyImage;
-													});
+  }
 
-											if (lazyImages.length === 0) {
-												document.removeEventListener(
-														"scroll",
-														lazyLoadImages);
-												document.removeEventListener(
-														"touchmove",
-														lazyLoadImages);
-												window.removeEventListener(
-														"resize",
-														lazyLoadImages);
-												window.removeEventListener(
-														"orientationchange",
-														lazyLoadImages);
-											}
-										}
-									});
+  // Initializing the carousel
+  // ---------------------------------------------------------------------------
+  function add_insta_gallery_popup($item) {
 
-							active = false;
-						}, 200);
-			}
-		};
+    var $wrap = $('.insta-gallery-items', $item),
+            options = $wrap.data('igfs');
 
-		document.addEventListener("scroll", lazyLoadImages);
-		document.addEventListener("touchmove", lazyLoadImages);
-		window.addEventListener("resize", lazyLoadImages);
-		window.addEventListener("orientationchange", lazyLoadImages);
-		lazyLoadImages();
-	}
-	
+    if (options.popup) {
 
-	// ie8 test
-	function insgal_ieTest() {
-		if (navigator.appVersion.indexOf("MSIE 8.") != -1) {
-			document.body.className += ' ' + 'instagal-ie-8';
-		}
-		if (navigator.appVersion.indexOf("MSIE 9.") != -1) {
-			document.body.className += ' ' + 'instagal-ie-9';
-		}
-	}
+      $wrap.find('.ig-item > a').magnificPopup({
+        type: 'image',
+        mainClass: 'mfp-with-zoom',
+        zoom: {
+          enabled: true,
+          duration: 300,
+          easing: 'ease-in-out',
+          opener: function (openerElement) {
+            return openerElement.is('img') ? openerElement
+                    : openerElement.find('img');
+          }
+        },
+        gallery: {
+          enabled: true
+        },
+        image: {
+          titleSrc: function (item) {
+            return item.el.attr('data-title')
+                    + '<small><a href="'
+                    + item.el.attr('data-iplink')
+                    + '" target="blank" title="view on Instagram"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><path style=" " d="M 5 3 C 3.898438 3 3 3.898438 3 5 L 3 19 C 3 20.101563 3.898438 21 5 21 L 19 21 C 20.101563 21 21 20.101563 21 19 L 21 13 L 19 11 L 19 19 L 5 19 L 5 5 L 13 5 L 11 3 Z M 14 3 L 16.65625 5.65625 L 9.15625 13.15625 L 10.84375 14.84375 L 18.34375 7.34375 L 21 10 L 21 3 Z "/>Link</svg></a></small>';
+          }
+        }
+      });
+    }
+  }
 
-	// start loading as the script loaded
-	if ($('.ig-block').length) {
-		load_ig_gallery();
-	}
+  /*function add_insta_gallery_resizes($item, options) {
+   
+   var $wrap = $('.insta-gallery-items', $item),
+   $images = $wrap.find('.ig-item .insta-gallery-image'),
+   images = $images.length,
+   loaded = 0,
+   minheight = 0;
+   
+   if ($images.length) {
+   
+   $images.load(function (e) {
+   loaded++;
+   
+   if (minheight == 0) {
+   minheight = $(this).height();
+   }
+   if (($(this).width() == $(this).height())) {
+   minheight = $(this).height();
+   }
+   if (loaded >= images) {
+   $images.each(function (index) {
+   console.log('init resizes 2');
+   var th = $(this).height();
+   console.log(th);
+   console.log(minheight);
+   //if (minheight < th) {
+   console.log('init resizes 3');
+   var m = (th - minheight) / 2;
+   console.log(m);
+   $(this).css('margin-top', '-' + m + 'px');
+   $(this).css('margin-bottom', '-' + m + 'px');
+   //}
+   });
+   }
+   });
+   }
+   
+   }*/
 
-	jQuery(function($) {
-		load_ig_gallery();
-		insgal_ieTest();
-	});
+  /*function ig_lazy_load($wrap, igfs) {
+   var lazyImages = [].slice.call($wrap.find('img.ig-lazy'));
+   var active = false;
+   
+   var lazyLoadImages = function () {
+   if (active === false) {
+   active = true;
+   
+   setTimeout(
+   function () {
+   lazyImages
+   .forEach(function (lazyImage) {
+   if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage
+   .getBoundingClientRect().bottom >= 0)
+   && getComputedStyle(lazyImage).display !== "none") {
+   lazyImage.src = lazyImage.dataset.src;
+   lazyImage.classList.remove("lazy");
+   
+   lazyImages = lazyImages
+   .filter(function (image) {
+   return image !== lazyImage;
+   });
+   
+   if (lazyImages.length === 0) {
+   document.removeEventListener(
+   "scroll",
+   lazyLoadImages);
+   document.removeEventListener(
+   "touchmove",
+   lazyLoadImages);
+   window.removeEventListener(
+   "resize",
+   lazyLoadImages);
+   window.removeEventListener(
+   "orientationchange",
+   lazyLoadImages);
+   }
+   }
+   });
+   
+   active = false;
+   }, 200);
+   }
+   };
+   
+   document.addEventListener("scroll", lazyLoadImages);
+   document.addEventListener("touchmove", lazyLoadImages);
+   window.addEventListener("resize", lazyLoadImages);
+   window.addEventListener("orientationchange", lazyLoadImages);
+   lazyLoadImages();
+   }*/
+
+  // IE8
+  // ---------------------------------------------------------------------------
+
+  if (navigator.appVersion.indexOf("MSIE 8.") != -1) {
+    document.body.className += ' ' + 'instagal-ie-8';
+  }
+  if (navigator.appVersion.indexOf("MSIE 9.") != -1) {
+    document.body.className += ' ' + 'instagal-ie-9';
+  }
+
+  $(document).on('ready', function (e) {
+
+    $('.ig-block').each(function (index, item) {
+
+      var $item = $(item);
+
+      if ($item.hasClass('ig-block-loaded')) {
+        return true;
+      }
+
+      if (!$item.data('item_id')) {
+        return false;
+      }
+
+      $item.addClass('ig-block-loaded');
+
+      var $spinner = $item.find('.ig-spinner'),
+              item_id = parseInt($item.data('item_id'));
+
+      $.ajax({
+        url: qligg.ajax_url,
+        type: 'post',
+        data: {
+          action: 'qligg_load_item',
+          item_id: item_id
+        },
+        beforeSend: function () {
+          //$spinner.show();
+        },
+        success: function (response) {
+
+          if (response.success !== true) {
+            console.log(response.data);
+            return;
+          }
+
+          $item.append($(response.data));
+
+          add_insta_gallery_carousel($item);
+          //add_insta_gallery_masonry($item);
+          //add_insta_gallery_resizes($item);
+          add_insta_gallery_popup($item);
+
+        },
+        complete: function () {
+          $spinner.hide();
+          //if ($item.find('.insta-gallery-actions').length) {
+          //  $spinner.prependTo($item.find('.insta-gallery-actions'));
+          //}
+        },
+        error: function (jqXHR, textStatus) {
+          console.log(textStatus);
+        }
+      });
+    });
+  });
 
 })(jQuery);

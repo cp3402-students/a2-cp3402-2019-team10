@@ -469,7 +469,9 @@ class N2GeneratorPostsPosts extends N2GeneratorAbstract {
                 $record['primary_category_name'] = $primary->name;
                 $record['primary_category_link'] = get_category_link($primary->cat_ID);
             }
-            $record['excerpt'] = get_the_excerpt();
+            $record['excerpt']       = get_the_excerpt();
+            $record['comment_count'] = $post->comment_count;
+            $record['guid']          = $post->guid;
 
             if (!empty($custom_dates)) {
                 foreach ($custom_dates AS $custom_date_key => $custom_date_format) {
