@@ -1293,7 +1293,18 @@ N2D('UniversalPointer', function ($, undefined) {
         this.timeouts = [];
     };
 
-    UniversalClickContext.prototype.click = function (e) {
+    UniversalClickContext.prototype.click = function (e, currentTarget) {
+
+        if (currentTarget !== undefined) {
+            /**
+             * For complex events, we need to fix the currentTarget property
+             * @type {{currentTarget: *, target: *}}
+             */
+            e = {
+                currentTarget: currentTarget,
+                target: this.el
+            };
+        }
 
         this.handler.call(this.el, e);
 
@@ -1336,12 +1347,14 @@ N2D('UniversalPointer', function ($, undefined) {
                 context.addGlobalEventListener('pointerdown', function (downEvent) {
                     if (!downEvent.isPrimary) return;
 
+                    var currentTarget = downEvent.currentTarget;
+
                     context.addLocalEventListener(document.body.parentNode, 'pointerup', function (upEvent) {
                         if (!upEvent.isPrimary) return;
 
                         if (downEvent.pointerId === upEvent.pointerId) {
                             if (Math.abs(upEvent.clientX - downEvent.clientX) < 10 && Math.abs(upEvent.clientY - downEvent.clientY) < 10) {
-                                context.click(upEvent);
+                                context.click(upEvent, currentTarget);
                             } else {
                                 context.clear();
                             }
@@ -1359,12 +1372,14 @@ N2D('UniversalPointer', function ($, undefined) {
 
                 if (touchEvents) {
                     context.addGlobalEventListener('touchstart', function (downEvent) {
+                        var currentTarget = downEvent.currentTarget;
+
                         context.clearTimeouts();
 
                         context.preventMouse = true;
                         context.addLocalEventListener(document.body.parentNode, 'touchend', function (upEvent) {
                             if (Math.abs(upEvent.changedTouches[0].clientX - downEvent.changedTouches[0].clientX) < 10 && Math.abs(upEvent.changedTouches[0].clientY - downEvent.changedTouches[0].clientY) < 10) {
-                                context.click(upEvent);
+                                context.click(upEvent, currentTarget);
                             } else {
                                 context.clear();
                             }

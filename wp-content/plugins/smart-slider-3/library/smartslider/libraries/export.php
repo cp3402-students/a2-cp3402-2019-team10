@@ -199,6 +199,7 @@ class N2SmartSliderExport {
         N2AssetsManager::createStack();
 
         N2AssetsPredefined::frontend(true);
+        N2Base::getApplication('smartslider')->info->assetsFrontend(true);
 
         ob_start();
         N2Base::getApplication("smartslider")

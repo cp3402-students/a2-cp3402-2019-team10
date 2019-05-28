@@ -4,6 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 function n2_fl_builder_force_iframe() {
+    remove_action('wp_enqueue_scripts', 'N2SS3Shortcode::shortcodeModeToNoop', 1000000);
     N2SS3Shortcode::forceIframe('beaverbuilder');
 }
 

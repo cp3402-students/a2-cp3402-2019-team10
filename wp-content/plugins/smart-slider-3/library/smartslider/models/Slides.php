@@ -319,12 +319,6 @@ class N2SmartsliderSlidesModel extends N2Model {
             'rowClass' => 'n2-expert'
         ));
 
-        $publishDates = new N2ElementMixed($settings, 'publishdates', n2_('Published between'), '0000-00-00 00:00:00|*|0000-00-00 00:00:00', array(
-            'rowClass' => 'n2-expert'
-        ));
-        new N2ElementDate($publishDates, 'publishdates-1', n2_('Publish up'));
-        new N2ElementDate($publishDates, 'publishdates-2', n2_('Publish down'));
-
         new N2ElementNumber($settings, 'slide-duration', n2_('Slide duration'), 0, array(
             'unit'  => 'ms',
             'style' => 'width:40px;'
@@ -388,10 +382,15 @@ class N2SmartsliderSlidesModel extends N2Model {
         if (isset($slide['publishdates'])) {
             $date = explode('|*|', $slide['publishdates']);
         } else {
-            $date[0] = $slide['publish_up'];
-            $date[1] = $slide['publish_down'];
-            unset($slide['publish_up']);
-            unset($slide['publish_down']);
+            $date = array();
+            if (isset($slide['publish_up'])) {
+                $date[0] = $slide['publish_up'];
+                unset($slide['publish_up']);
+            }
+            if (isset($slide['publish_down'])) {
+                $date[1] = $slide['publish_down'];
+                unset($slide['publish_down']);
+            }
         }
         $up   = strtotime(isset($date[0]) ? $date[0] : '');
         $down = strtotime(isset($date[1]) ? $date[1] : '');
@@ -816,7 +815,7 @@ class N2SmartsliderSlidesModel extends N2Model {
 
         $rb = array();
 
-        $image = $slide->getThumbnail();
+        $image = $slide->getThumbnailDynamic();
         if (empty($image)) {
             $image = N2ImageHelper::fixed('$system$/images/placeholder/image.png');
         }

@@ -898,8 +898,10 @@ N2D('SmartSliderResponsiveSimple', ['SmartSliderResponsive'], function ($, undef
             }
         }
 
-        $video.css('marginTop', 0)
-            .css(n2const.rtl.marginLeft, 0);
+        $video.css({
+            marginTop: 0,
+            marginLeft: 0
+        });
         this.center($video);
     };
 
@@ -907,9 +909,9 @@ N2D('SmartSliderResponsiveSimple', ['SmartSliderResponsive'], function ($, undef
         var parent = $video.parent();
 
         $video.css({
-            marginTop: parseInt((parent.height() - $video.height()) / 2)
+            marginTop: Math.round((parent.height() - $video.height()) / 2),
+            marginLeft: Math.round((parent.width() - $video.width()) / 2)
         });
-        $video.css(n2const.rtl.marginLeft, parseInt((parent.width() - $video.width()) / 2));
     };
 
     return SmartSliderResponsiveSimple;

@@ -54,7 +54,7 @@ class N2SS3Widget extends WP_Widget {
 
         if ($slider != '') {
 
-            $title = apply_filters('widget_title', $instance['title']);
+            $title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
 
             echo $args['before_widget'];
             if (!empty($title)) echo $args['before_title'] . $title . $args['after_title'];

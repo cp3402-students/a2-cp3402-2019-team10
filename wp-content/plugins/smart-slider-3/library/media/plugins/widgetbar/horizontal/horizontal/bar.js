@@ -70,6 +70,17 @@ N2D('SmartSliderWidgetBarHorizontal', function ($, undefined) {
         this.onSliderSwitchTo(null, slide.index);
     };
 
+    SmartSliderWidgetBarHorizontal.prototype.hasContent = function (slide) {
+
+        if (this.parameters.showTitle && (slide.getTitle() !== undefined || this.parameters.slideCount)) {
+            return true;
+        } else if (this.parameters.showDescription && (slide.getDescription() !== undefined || this.parameters.slideCount)) {
+            return true;
+        }
+
+        return false;
+    };
+
     SmartSliderWidgetBarHorizontal.prototype.renderBarContent = function (slide) {
         var html = '';
         if (this.parameters.showTitle && (slide.getTitle() !== undefined || this.parameters.slideCount)) {
@@ -89,6 +100,9 @@ N2D('SmartSliderWidgetBarHorizontal', function ($, undefined) {
             html += '<span class="' + this.parameters.fontDescription + ' n2-ow">' + (html === '' ? '' : this.parameters.separator) + description + '</span>';
         }
 
+        if (html === '') {
+            return '<span class="' + this.parameters.fontDescription + ' n2-ow">&nbsp;</span>';
+        }
         return html;
     };
 
@@ -99,7 +113,7 @@ N2D('SmartSliderWidgetBarHorizontal', function ($, undefined) {
         this.innerBar.html(html);
         this.setCursor(targetSlide.hasLink());
 
-        this.slider.widgets.setState('hide.bar', html === '');
+        this.slider.widgets.setState('hide.bar', !this.hasContent(targetSlide));
     };
 
     SmartSliderWidgetBarHorizontal.prototype.onSliderSwitchToAnimateStart = function () {
@@ -129,6 +143,8 @@ N2D('SmartSliderWidgetBarHorizontal', function ($, undefined) {
                 .appendTo(this.bar);
 
             this.setCursor(targetSlide.hasLink());
+
+            this.slider.widgets.setState('hide.bar', !this.hasContent(targetSlide));
 
             this.tween = NextendTween.to(this.innerBar, 0.3, {
                 opacity: 1

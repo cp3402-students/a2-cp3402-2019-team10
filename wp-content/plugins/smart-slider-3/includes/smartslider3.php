@@ -19,6 +19,9 @@ class SmartSlider3 {
             wp_redirect(admin_url('admin.php?page=' . NEXTEND_SMARTSLIDER_3_URL_PATH));
             exit;
         }
+        require_once dirname(__FILE__) . '/summersale.php';
+    
+    
 
         add_action('widgets_init', 'SmartSlider3::widgets_init', 11);
         add_action('widgets_admin_page', 'SmartSlider3::widgets_admin_page');
@@ -84,6 +87,10 @@ class SmartSlider3 {
             require_once dirname(__FILE__) . '/integrations/tablepress.php';
         }
 
+        add_action('fusion_builder_shortcodes_init', function () {
+            require_once dirname(__FILE__) . '/integrations/Fusion/Fusion.php';
+        });
+
         /**
          * Fix for NextGenGallery and Divi live editor bug
          */
@@ -110,7 +117,10 @@ class SmartSlider3 {
 
     public static function plugin_action_links($links, $file) {
         if ($file === NEXTEND_SMARTSLIDER_3_BASENAME && current_user_can('manage_options')) {
-            $links[] = sprintf('<a href="%s">%s</a>', wp_nonce_url(admin_url('admin.php?page=' . NEXTEND_SMARTSLIDER_3_URL_PATH . '&repairss3=1'), 'repairss3'), 'Repair');
+            if (!is_array($links)) {
+                $links = array();
+            }
+            $links[] = sprintf('<a href="%s">%s</a>', wp_nonce_url(admin_url('admin.php?page=' . NEXTEND_SMARTSLIDER_3_URL_PATH . '&repairss3=1'), 'repairss3'), 'Reactivate');
         }
 
         return $links;

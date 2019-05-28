@@ -139,12 +139,11 @@ class N2SSSlideComponentRow extends N2SSSlideComponent {
             $link                          = N2LinkParser::parse($this->owner->fill($link), $this->attributes);
             $this->attributes['data-href'] = $link;
 
-            if (!isset($this->attributes['onclick'])) {
-                if (empty($target) || $target == '_self') {
-                    $this->attributes['onclick'] = "n2const.setLocation(this.getAttribute('data-href'))";
-                } else {
-                    $this->attributes['onclick'] = 'var w=window.open();w.opener=null;w.location=this.getAttribute("data-href");';
+            if (!isset($this->attributes['onclick']) && !isset($this->attributes['n2-lightbox'])) {
+                if (!empty($target) && $target != '_self') {
+                    $this->attributes['data-target'] = $target;
                 }
+                $this->attributes['onclick'] = "n2ss.openUrl(event);";
             }
             $this->attributes['style'] .= 'cursor:pointer;';
 

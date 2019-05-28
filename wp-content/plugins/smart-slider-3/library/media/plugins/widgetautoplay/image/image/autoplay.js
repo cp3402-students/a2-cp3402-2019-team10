@@ -47,7 +47,10 @@ N2D('SmartSliderWidgetAutoplayImage', function ($, undefined) {
                 })
                 .trigger('addWidget', this.deferred);
 
-            this.button.on('universalclick', $.proxy(this.switchState, this));
+            this.button.on({
+                n2Activate: $.proxy(this.switchState, this),
+                universalclick: $.proxy(this.switchState, this)
+            });
 
             this.desktopRatio = desktopRatio;
             this.tabletRatio = tabletRatio;
@@ -86,8 +89,6 @@ N2D('SmartSliderWidgetAutoplayImage', function ($, undefined) {
     };
 
     SmartSliderWidgetAutoplayImage.prototype.switchState = function (e) {
-
-        e.preventDefault();
 
         /**
          * Mark the event notify parents that the event already handled for Autoplay interaction

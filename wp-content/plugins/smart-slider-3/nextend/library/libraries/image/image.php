@@ -10,6 +10,10 @@ class N2Image extends N2CacheImage {
 
     public static function resizeImage($group, $imageUrl, $targetWidth, $targetHeight, $lazy = false, $mode = 'cover', $backgroundColor = false, $resizeRemote = false, $quality = 100, $optimize = false, $x = 50, $y = 50) {
 
+        if (strpos($imageUrl, N2Filesystem::getBasePath()) === 0) {
+            $imageUrl = N2Uri::pathToUri($imageUrl);
+        }
+
         if ($targetWidth <= 0 || $targetHeight <= 0 || !function_exists('imagecreatefrompng')) {
             return N2Filesystem::pathToAbsoluteURL($imageUrl);
         }
