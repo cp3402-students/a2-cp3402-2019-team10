@@ -7,6 +7,10 @@
  - [Yvan Burrie](https://github.com/jc444304)
  - [Anthony Vincin](https://github.com/AnthonyV01)
  - [Stephen Ohl](https://github.com/StephenOhl)
+ 
+## Theme Installation Details
+ - Install Wordpress (v5.1.1) according to the installation instructions [here] (https://codex.wordpress.org/Installing_WordPress)
+ - Extract the theme archive
 
 ## Server
  - Domain: [notdotcom.fun](https://notdotcom.fun/)
@@ -79,3 +83,5 @@ The following instructions are based on using basic Unix commandline tools.  If 
    - Prints a message containing the URL of the site.
    
 test change - push from phpstorm
+
+
