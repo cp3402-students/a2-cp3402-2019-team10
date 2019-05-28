@@ -1,0 +1,20 @@
+2019-05-26T05:39:21+00:00 CRITICAL Uncaught Error: Call to undefined function simplexml_load_file() in /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php:40
+Stack trace:
+#0 /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php(20): bodhi_svgs_get_dimensions('/var/www/html/s...')
+#1 /var/www/html/staging/wp-includes/class-wp-hook.php(286): bodhi_svgs_response_for_svg(Array, Object(WP_Post), '')
+#2 /var/www/html/staging/wp-includes/plugin.php(208): WP_Hook->apply_filters(Array, Array)
+#3 /var/www/html/staging/wp-includes/media.php(3421): apply_filters('wp_prepare_atta...', Array, Object(WP_Post), '')
+#4 /var/www/html/staging/wp-includes/customize/class-wp-customize-media-control.php(111): wp_prepare_attachment_for_js(Object(WP_Post))
+#5 /var/www/html/staging/wp-includes/customize/class-wp-customize-upload-control.php(33): WP_Customize_Media_Control->to_json()
+#6 /var/www/html/staging/wp-includes/customize/class-wp-customize-cropped-image-control.php(78): WP_Customize_Upload_Control-> in /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php on line 40
+
+2019-05-26T05:39:49+00:00 CRITICAL Uncaught Error: Call to undefined function simplexml_load_file() in /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php:40
+Stack trace:
+#0 /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php(20): bodhi_svgs_get_dimensions('/var/www/html/s...')
+#1 /var/www/html/staging/wp-includes/class-wp-hook.php(286): bodhi_svgs_response_for_svg(Array, Object(WP_Post), '')
+#2 /var/www/html/staging/wp-includes/plugin.php(208): WP_Hook->apply_filters(Array, Array)
+#3 /var/www/html/staging/wp-includes/media.php(3421): apply_filters('wp_prepare_atta...', Array, Object(WP_Post), '')
+#4 /var/www/html/staging/wp-includes/customize/class-wp-customize-media-control.php(111): wp_prepare_attachment_for_js(Object(WP_Post))
+#5 /var/www/html/staging/wp-includes/customize/class-wp-customize-upload-control.php(33): WP_Customize_Media_Control->to_json()
+#6 /var/www/html/staging/wp-includes/customize/class-wp-customize-cropped-image-control.php(78): WP_Customize_Upload_Control-> in /var/www/html/staging/wp-content/plugins/svg-support/functions/attachment-modal.php on line 40
+
