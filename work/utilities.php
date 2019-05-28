@@ -383,7 +383,7 @@ class Developer {
         $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
         if( FALSE === $this->{'cd'} = $path ){
             return FALSE;
-        }return TRUE;
+        }
         /** @var string $command */
         $command = 'push origin master';
         return $this->{'git'} = $command;

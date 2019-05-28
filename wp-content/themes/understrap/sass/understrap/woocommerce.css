@@ -1,0 +1,11 @@
+.woocommerce-input-wrapper {
+  width: 100%; }
+
+figure.woocommerce-product-gallery__wrapper {
+  max-width: inherit !important; }
+
+@media (min-width: 768px) {
+  #coupon_code.input-text {
+    width: 110px !important; } }
+
+/*# sourceMappingURL=woocommerce.css.map */

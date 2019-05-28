@@ -1,29 +1,37 @@
-// This is an empty scss file for your custom styles - Please add your super duper awesome mega design styles here
+
+body {
+  background-image: linear-gradient(#FFFFC1, #EEEEEE);
+}
+
 h1, h2, h3, h4 {
-  font-family: $font__sans, "Montserrat", Arial, sans-serif;
+  font-family: $font__serif, "Helvetica", Arial, serif;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 P {
-  font-family: $font__nunito, 'Helvetica', Arial, serif;
+  font-family: $font__sans, 'Montserrat', Arial, sans-serif;
 }
 
 .bg-primary {
-  // variables declared in ./sass/theme/_theme_variables.scss
-  // !important tag is needed when using variables
+// variables declared in ./sass/theme/_theme_variables.scss
+// !important tag is needed when using variables
 
-  background-color: $header-bg-colour!important;
+background-color: $header-bg-colour!important;
 }
 
 .wrapper {
   padding: 0;
 }
 
-.post {
-  padding: 2em 2em 2em 0;
-}
-
-.post-16 {
-  padding: 2em 2em 2em 0;
+.post, .post-16, .post-13, .post-84 {
+  padding: 2em 0 2em 0;
 }
 
 #wrapper-footer {
@@ -31,7 +39,56 @@ P {
   text-align: center;
 }
 
+hr.wp-block-separator {
+  background-image: url(../css/separator.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 12px;
+  border: 0;
+  padding: 2em 0;
+}
+
 #right-sidebar {
   padding-top: 2em;
+}
+
+.woocommerce {
+  .woocommerce-breadcrumb {
+    margin: 2em 0 1em;
+  }
+}
+
+.page-header {
+  padding: 2em 2em 0 0;
+
+}
+
+.widget_recent_entries {
+  padding: 1em 0 0 0;
+}
+
+.wp-block-columns {
+  padding: 2em 0 2em 0;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: $header-bg-colour!important;
+  border-color: rgba(197, 197, 197, 1);
+}
+
+.woocommerce-loop-product__title {
+  color: black;
+}
+
+.btn-outline-primary {
+  color: black;
+  border-color: black;
+}
+
+.btn-outline-primary:hover {
+  background-color: $header-bg-colour!important;
+  border-color: $color-primary-dark!important;
+  color: white;
 }
 
