@@ -62,6 +62,19 @@ class Configurations {
      */
     public $developers = [];
 
+	/**
+	 * @param string $identifier
+	 * @return Developer|null
+	 */
+    public function getDeveloperByIdentifier( string $identifier ): Developer {
+    	foreach( $this->developers as $developer ){
+    		if( $developer->identifier == $identifier ){
+    			return $developer;
+		    }
+	    }
+    	return NULL;
+	}
+
     /**
      * @var string
      */
@@ -70,9 +83,9 @@ class Configurations {
     /**
      * @param string|null $message
      * @param string[]|null $extras
-     * @return static
+     * @return self
      */
-    public function log( string $message = NULL, string ... $extras ){
+    public function log( string $message = NULL, string ... $extras ): self {
         count($params = func_get_args()) ? is_string($string = call_user_func_array('sprintf', $params)) &&
             $this->output[] = $string :
             $this->output[] = "\n";
@@ -99,7 +112,7 @@ class Configurations {
      * @param string $fileName
      * @return static
      */
-    public static function openIni( string $fileName ){
+    public static function openIni( string $fileName ): self {
         $that = new static;
         $data = parse_ini_file($fileName, TRUE, INI_SCANNER_RAW);
         if( TRUE === is_array($data) ){
@@ -114,30 +127,35 @@ class Configurations {
     }
 
     /**
-     * @param array $data
+     * @param array $buffer0
      */
-    public function loadIni( array $data ){
+    public function loadIni( array $buffer0 ){
         /** @var mixed $buffer1 */
-        $buffer1 = &$data['base_name'];
+        $buffer1 = &$buffer0['base_name'];
         $buffer1 !== NULL && $this->baseName = (string)$buffer1;
-        $buffer1 = &$data['base_path'];
+        $buffer1 = &$buffer0['base_path'];
         $buffer1 !== NULL && $this->basePath = $this::convertPath((string)$buffer1);
-        $buffer1 = &$data['repo_id'];
+        $buffer1 = &$buffer0['repo_id'];
         $buffer1 !== NULL && $this->repoId = (int)$buffer1;
-        $buffer1 = &$data['repo_name'];
+        $buffer1 = &$buffer0['repo_name'];
         $buffer1 !== NULL && $this->repoName = (string)$buffer1;
-        $buffer1 = &$data['wp_prefix'];
+        $buffer1 = &$buffer0['wp_prefix'];
         $buffer1 !== NULL && $this->wpPrefix = (string)$buffer1;
-        $buffer1 = &$data['base_msg'];
+        $buffer1 = &$buffer0['base_msg'];
         $buffer1 !== NULL && $this->baseMsg = (string)$buffer1;
-        $buffer1 = &$data['developers'];
+        $buffer1 = &$buffer0['developers'];
+        /** @var Developer $developer */
         if( TRUE === is_array($buffer1) ){
-            foreach( $buffer1 as $bufferKey => $bufferVal ){
-                if( FALSE === (bool)(int)$bufferVal ) continue;
-                $developer = new Developer($this, (string)$bufferKey);
+        	/**
+	         * @var string $bufferKey
+	         * @var mixed $bufferVal
+	         */
+	        foreach( $buffer1 as $bufferKey => $bufferVal ){
+                if( 0 === $bufferVal ) continue;
+                $developer = new Developer($this, (string)$bufferKey, (int)$bufferVal);
                 $developer->database = new MySqlDb($developer);
                 /** @var array|null $buffer2 */
-                $buffer2 = &$data['dev:' . $developer->identifier];
+                $buffer2 = &$buffer0[ 'dev:' . $developer->identifier];
                 if( TRUE === is_array($buffer2) ){
                     /** @var mixed $buffer3 */
                     $buffer3 = &$buffer2['git_path'];
@@ -154,6 +172,8 @@ class Configurations {
                     $buffer3 !== NULL && $developer->database->pass = (string)$buffer3;
                     $buffer3 = &$buffer2['wp_url'];
                     $buffer3 !== NULL && $developer->wpUrl = (string)$buffer3;
+                    $buffer3 = &$buffer2['repo_branch'];
+                    $buffer3 !== NULL && $developer->repoBranch = (string)$buffer3;
                 }
                 $this->developers[] = $developer;
             }
@@ -162,10 +182,9 @@ class Configurations {
 
     /**
      * @param array $post
-     * @param int $developerId
      * @return bool
      */
-    public function handleHook( array $post, int $developerId = 0 ): bool {
+    public function handleHook( array $post ): bool {
         $this->log('Attempting to hook.')->log();
         if( FALSE === isset($post['repository']) ||
             FALSE === isset($post['pusher']) ||
@@ -184,8 +203,17 @@ class Configurations {
             $this->log('Repository name (%s) mismatches (%s).', $postedRepoName, $this->repoName)->log();
             return FALSE;
         }
-        $this->log('Verifying server as developer.')->log();
-        if( NULL === $developer = &$this->developers[$developerId] ){
+        $this->log('Verifying suitable developer as publisher.')->log();
+	    /** @var Developer $developer */
+        foreach( $this->developers as $developer ){
+        	if( $developer->type === Developer::TYPE_SERVER ){
+        		if( $developer->repoBranch == $post['repository']['default_branch'] ?? NULL ){
+        			break;
+		        }
+	        }
+        }
+        if( NULL === $developer ){
+        	$this->log('Could not find developer with correct publication branch.')->log();
             return FALSE;
         }
         if( FALSE === is_array($postedCommits = &$post['commits']) ){
@@ -274,13 +302,32 @@ class Developer {
      */
     public $wpUrl = 'http://localhost/';
 
-    /**
-     * @param Configurations $configurations
-     * @param string|null $identifier
-     */
-    public function __construct( Configurations $configurations, string $identifier = NULL ){
+	/**
+	 * @var string
+	 */
+    public $repoBranch = 'master';
+
+	/**
+	 * @var int
+	 */
+    public $type = 0;
+
+	const TYPE_LOCAL = 1;
+	const TYPE_SERVER = 2;
+
+	/**
+	 * @param Configurations $configurations
+	 * @param string|null $identifier
+	 * @param int $type
+	 */
+    public function __construct( Configurations $configurations, string $identifier = NULL, int $type = NULL ){
         $this->configurations = $configurations;
-        $this->identifier = $identifier;
+        if( NULL !== $identifier ){
+        	$this->identifier = $identifier;
+        }
+        if( NULL === $type ){
+        	$this->type = $type;
+        }
     }
 
     /**
@@ -352,26 +399,38 @@ class Developer {
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function commitLastBases(){
+	/**
+	 * @param array $fileNames
+	 * @param string $message
+	 * @return bool
+	 */
+    public function commit( array $fileNames, string $message ){
         /** @var string $path */
         $path = implode(DIRECTORY_SEPARATOR, $this->rootPath);
         if( FALSE === $this->{'cd'} = $path ){
             return FALSE;
         }
-        if( count($this->configurations->lastBases) > 0 ){
-            $command = 'add "' . implode('" "', $this->configurations->lastBases) . '"';
-            if( FALSE === $this->{'git'} = $command ){
-                return FALSE;
-            }
-            $command = 'commit -m "' . $this->configurations->baseMsg . '"';
-            if( FALSE === $this->{'git'} = $command ){
-                return FALSE;
-            }
-            $this->configurations->lastBases = [];
+        $command = 'add "' . implode('" "', $fileNames) . '"';
+        if( FALSE === $this->{'git'} = $command ){
+            return FALSE;
         }
+        $command = 'commit -m "' . $message . '"';
+        if( FALSE === $this->{'git'} = $command ){
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function commitLastBases(){
+	    if( count($this->configurations->lastBases) > 0 ){
+	    	if( FALSE === $this->commit($this->configurations->lastBases, $this->configurations->baseMsg) ){
+	    		return FALSE;
+		    }
+		    $this->configurations->lastBases = [];
+	    }
         return TRUE;
     }
 
@@ -385,7 +444,7 @@ class Developer {
             return FALSE;
         }
         /** @var string $command */
-        $command = 'push origin master';
+        $command = 'push origin ' . $this->repoBranch;
         return $this->{'git'} = $command;
     }
 
@@ -399,7 +458,7 @@ class Developer {
             return FALSE;
         }
         /** @var string $command */
-        $command = 'pull > git-pull.txt 2> git-pull.err';
+        $command = 'pull origin ' . $this->repoBranch . ' > git-pull.txt 2> git-pull.err';
         return $this->{'git'} = $command;
     }
 }
