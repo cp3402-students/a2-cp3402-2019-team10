@@ -191,7 +191,7 @@ class Configurations {
     	foreach ($post as $i){
     		$d .= $i;
 	    }
-    	file_put_contents('log2.txt', is_array($post) ? 'yes' : 'no');
+    	file_put_contents('log2.txt', is_array($post['hook'] ?? NULL) ? 'yes' : 'no');
         $this->log('Attempting to hook.')->log();
         /*
         if( FALSE === isset($post['repository']) ||
