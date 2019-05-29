@@ -188,7 +188,7 @@ class Configurations {
      */
     public function handleHook( array $post ): bool {
     	$d = '';
-    	foreach ($post as $i){
+    	foreach ($post['hook'] as $i){
     		$d .= $i;
 	    }
     	file_put_contents('log2.txt', $d);
