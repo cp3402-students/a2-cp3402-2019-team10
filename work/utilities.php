@@ -186,12 +186,12 @@ class Configurations {
      * @param array $post
      * @return bool
      */
-    public function handleHook( array $post ): bool {
+    public function handleHook( $post ): bool {
     	$d = '';
-    	foreach ($post['hook'] as $i){
+    	foreach ($post as $i){
     		$d .= $i;
 	    }
-    	file_put_contents('log2.txt', (string)is_array(@$post['hook']) . (string)is_array($post));
+    	file_put_contents('log2.txt', is_array($post) ? 'yes' : 'no');
         $this->log('Attempting to hook.')->log();
         /*
         if( FALSE === isset($post['repository']) ||
