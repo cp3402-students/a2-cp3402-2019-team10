@@ -39,6 +39,7 @@ switch( $ACTION ){
                 'Invalid hook triggered.',
             ];
         }
+        file_put_contents('log.txt', implode("\n", $CONFIGURATIONS->output));
         break;
     case 'deploy':
         $MENU[] = '<a href="?' . http_build_query(['action' => 'deploy']) .'">Deploy</a>';
