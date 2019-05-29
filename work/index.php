@@ -33,12 +33,22 @@ $ACTION = $_GET['action'] ?? NULL;
 switch( $ACTION ){
     case 'hook':
         file_put_contents('hook.txt', $_POST);
+        if( strpos('staging', getcwd()) ){
+            $developer = $CONFIGURATIONS->developers[0];
+        }
+        else
+        if( strpos('staging', getcwd()) ){
+            $developer = $CONFIGURATIONS->developers[1];
+        }
+        $developer->pull();
+        /*
         if( FALSE === $CONFIGURATIONS->handleHook($_POST) ){
             $ERROR = [
                 'Hook Error',
                 'Invalid hook triggered.',
             ];
         }
+        */
         file_put_contents('log.txt', implode("\n", $CONFIGURATIONS->output));
         break;
     case 'deploy':
