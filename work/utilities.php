@@ -193,6 +193,7 @@ class Configurations {
 	    }
     	file_put_contents('log2.txt', $d);
         $this->log('Attempting to hook.')->log();
+        /*
         if( FALSE === isset($post['repository']) ||
             FALSE === isset($post['pusher']) ||
             FALSE === isset($post['organization']) ||
@@ -201,6 +202,7 @@ class Configurations {
             $this->log('Invalid hook request.')->log();
             return FALSE;
         }
+        */
         $this->log('Verifying repository.')->log();
         if( $this->repoId != $postedRepoId = &$post['repository']['id'] ){
             $this->log('Repository ID (%d) mismatches (%d).', $postedRepoId, $this->repoId)->log();
