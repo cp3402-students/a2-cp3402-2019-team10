@@ -32,12 +32,14 @@ $MENU = [
 $ACTION = $_GET['action'] ?? NULL;
 switch( $ACTION ){
     case 'hook':
+        file_put_contents('hook.txt', $_POST);
         if( FALSE === $CONFIGURATIONS->handleHook($_POST) ){
             $ERROR = [
                 'Hook Error',
                 'Invalid hook triggered.',
             ];
         }
+        file_put_contents('log.txt', implode("\n", $CONFIGURATIONS->output));
         break;
     case 'deploy':
         $MENU[] = '<a href="?' . http_build_query(['action' => 'deploy']) .'">Deploy</a>';

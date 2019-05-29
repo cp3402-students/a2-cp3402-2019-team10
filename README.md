@@ -8,13 +8,6 @@
  - [Anthony Vincin](https://github.com/AnthonyV01)
  - [Stephen Ohl](https://github.com/StephenOhl)
  
-<<<<<<< HEAD
-=======
-## Theme Installation Details
- - Install Wordpress (v5.1.1) according to the installation instructions [here] (https://codex.wordpress.org/Installing_WordPress)
- - Extract the theme archive
-
->>>>>>> refs/remotes/origin/master
 ## Server
  - Domain: [notdotcom.fun](https://notdotcom.fun/)
  - Address: [139.162.34.109](139.162.34.109)
@@ -95,5 +88,3 @@
    - Prints a message containing the URL of the site.
    
 test change - push from phpstorm
-
-
