@@ -151,7 +151,9 @@ class Configurations {
 	         * @var mixed $bufferVal
 	         */
 	        foreach( $buffer1 as $bufferKey => $bufferVal ){
-                if( 0 === $bufferVal ) continue;
+                if( 0 === $bufferVal ){
+                	continue;
+                }
                 $developer = new Developer($this, (string)$bufferKey, (int)$bufferVal);
                 $developer->database = new MySqlDb($developer);
                 /** @var array|null $buffer2 */
@@ -414,7 +416,7 @@ class Developer {
         if( FALSE === $this->{'git'} = $command ){
             return FALSE;
         }
-        $command = 'commit -m "' . $message . '"';
+        $command = 'commit -m "' . str_replace('"', '\"', $message) . '"';
         if( FALSE === $this->{'git'} = $command ){
             return FALSE;
         }
@@ -448,6 +450,8 @@ class Developer {
         return $this->{'git'} = $command;
     }
 
+    const GIT_PULL_NAME = 'git-pull';
+
     /**
      * @return bool
      */
@@ -458,7 +462,7 @@ class Developer {
             return FALSE;
         }
         /** @var string $command */
-        $command = 'pull origin ' . $this->repoBranch . ' > git-pull.txt 2> git-pull.err';
+        $command = 'pull origin ' . $this->repoBranch . ' > ' . $this::GIT_PULL_NAME . '.txt 2> ' . $this::GIT_PULL_NAME . '.err';
         return $this->{'git'} = $command;
     }
 }
@@ -574,19 +578,35 @@ class MySqlDb extends Database {
         if( NULL === $baseName ){
             $baseName = $this->configurations->baseName;
         }
-        /** @var string $path */
-        $path = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . '.sql']));
-        if( FALSE === file_exists($path) ){
-            $this->configurations->log('Latest database backup file (%s) inexistent.', $path)->log();
+        /** @var string $path2 */
+        $path1 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . '.sql']));
+        if( FALSE === file_exists($path1) ){
+            $this->configurations->log('Latest database backup file (%s) inexistent.', $path1)->log();
             return FALSE;
         }
+        /** @var string $data */
+	    $data = file_get_contents($path1);
+        if( FALSE === $data ){
+		    $this->configurations->log('Latest database backup file (%s) could not be opened.', $path1)->log();
+		    return FALSE;
+	    }
+        $developer1 = $this->developer;
+        foreach( $this->configurations->developers as $developer2 ){
+        	if( $developer2->wpUrl === $developer1->wpUrl ){
+        		continue;
+	        }
+	        $data = str_replace($developer2->wpUrl, $developer1->wpUrl, $data);
+        }
+        /** @var string $path2 */
+        $path2 = implode(DIRECTORY_SEPARATOR, array_merge($this->configurations->basePath, [$baseName . ' (import).sql']));
+        file_put_contents($path2, $data);
         /** @var string $command */
         $command = '-u ' . $this->user . ' ';
         if( NULL !== $this->pass ){
             $command .= '-p' . base64_decode($this->pass) . ' ';
         }
         $command .= $this->name . ' ';
-        $command .= '< "' . $path . '"';
+        $command .= '< "' . $path2 . '"';
         if( FALSE === $this->developer->{'mysql'} = $command ){
             return FALSE;
         }

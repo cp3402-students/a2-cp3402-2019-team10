@@ -32,6 +32,7 @@ $MENU = [
 $ACTION = $_GET['action'] ?? NULL;
 switch( $ACTION ){
     case 'hook':
+        file_put_contents('hook.txt', $_POST);
         if( FALSE === $CONFIGURATIONS->handleHook($_POST) ){
             $ERROR = [
                 'Hook Error',
